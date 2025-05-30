@@ -8,14 +8,14 @@ body {
     align-items: left;
 }
 h1 {
-    font-family: Georgia;
+    font-family: var(--header-font);
     font-size: 1.7em;
     width: 80%;
     margin: 0 auto;
     padding: 20px 0;
 }
 legend {
-    font-family: Helvetica;
+    font-family: var(--body-font);
     font-size: .9em;
     font-weight: 400;
 }
@@ -25,7 +25,7 @@ fieldset {
     background-color: rgb(250, 252, 242);
 }
 label {
-    font-family: Helvetica;
+    font-family: var(--body-font);
     font-size: .9em;
     font-weight: 400;
     padding-top: 100px;
@@ -33,7 +33,7 @@ label {
 input {
     border: solid 1px rgb(0, 0, 0);
     border-radius: 8px;
-    font-family: Helvetica;
+    font-family: var(--body-font);
     font-weight: 400;
     padding: 5px;
     width: 100%;

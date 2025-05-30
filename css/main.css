@@ -1,5 +1,5 @@
-@import "partials/variables.css";
-@import "partials/global.css";
-@import "partials/header.css";
-@import "partials/footer.css";
-@import "partials/form.css";
+@import "./partials/variables.css";
+@import "./partials/global.css";
+@import "./partials/header.css";
+@import "./partials/footer.css";
+@import "./partials/form.css";
