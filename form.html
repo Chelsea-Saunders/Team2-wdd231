@@ -14,138 +14,171 @@
         <div class="step step-1 active">
             <fieldset>
                 <legend>Contact Information</legend>
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" placeholder="First and Last" required /><br><br>
+                <div class="inside-form">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" placeholder="First and Last" required /><br><br>
 
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" placeholder="email@email.com" required /><br><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="email@email.com" required /><br><br>
 
-                <label for="phone">Phone Number:</label><br>
-                <input type="tel" id="phone" name="phone" placeholder="123-456-7890" required/><br><br>
+                    <label for="phone">Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" placeholder="123-456-7890" required/><br><br>
 
-                <label for="address">Address:</label><br>
-                <input type="text" id="address" name="address" placeholder="1234 Street Name, Town, State Zip" required /><br><br>
+                    <label for="address">Address:</label><br>
+                    <input type="text" id="address" name="address" placeholder="1234 Street Name, Town, State Zip" required /><br><br>
 
-                <button type="button" class="next-button">Next</button>
+                    <div class="bottom-buttons">
+                    <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step2">
             <fieldset>
                 <legend>Work Experience</legend>
-                <label for="past-employment">Place of previous employment:</label><br>
-                <input type="text" id="past-employment" name="past-employment" placeholder="Company Name"><br><br>
-                
-                <label for="dates">Date of employment:</label><br>
-                <input type="text" id="dates" name="dates" placeholder="MM/DD/YYY"><br><br>
-                
-                <label for="duties">Job duties</label><br>
-                <input type="text" id="duties" name="duties" placeholder="List duties performed"><br><br>
 
-                <button type="button"class="addEntry">Add Work Experience</button>
-                <button type="button" class="back-button">Back</button>
-                <button type="button" class="next-button">Next</button>
+                <div class="inside-form">
+                    <label for="past-employment">Place of Previous Employment:</label><br>
+                    <input type="text" id="past-employment" name="past-employment" placeholder="Company Name"><br><br>
+                    
+                    <label for="dates">Date of Employment:</label><br>
+                    <input type="text" id="dates" name="dates" placeholder="MM/DD/YYY"><br><br>
+                    
+                    <label for="duties">Job Duties:</label><br>
+                    <input type="text" id="duties" name="duties" placeholder="List duties performed"><br><br>
+
+                    <div class="bottom-buttons">
+                        <button type="button" class="add-entry" id="add-work-experience">Add Work Experience</button><br>
+                        <button type="button" class="back-button">Back</button><br>
+                        <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step3">
             <fieldset>
                 <legend>Education Experience</legend>
-                <label for="college">Name of Institution</label>
-                <input type="text" id="college" name="college" placeholder="School Name"><br><br>
+                <div class="inside-form">
 
-                <label for="ed-dates">Dates of Education:</label><br>
-                <input type="text" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY"><br><br>
-                
-                <label for="education">Education Experience/Degree:</label><br>
-                <input type="text" id="education" name="education" placeholder="Degree or Certification"><br><br>
+                    <label for="college">Name of Institution</label>
+                    <input type="text" id="college" name="college" placeholder="School Name"><br><br>
 
-                <button type="button"class="addEntry">Add Education Experience</button>
-                <button type="button" class="back-button">Back</button>
-                <button type="button" class="next-button">Next</button>
+                    <label for="ed-dates">Dates of Education:</label><br>
+                    <input type="text" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY"><br><br>
+                    
+                    <label for="education">Education Experience/Degree:</label><br>
+                    <input type="text" id="education" name="education" placeholder="Degree or Certification"><br><br>
+
+                    <div class="bottom-buttons">
+                        <button type="button" class="add-entry" id="add-education">Add Education Experience</button><br>
+                        <button type="button" class="back-button">Back</button><br>
+                        <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step4">
             <fieldset>
                 <legend>Skills You Have</legend>
-                <label for="skills">Enter Your Skills:</label><br>
-                <input type="text" id="skills" name="skills" placeholder="Skill, Seperated by comma's"><br><br>
 
-                <button type="button"class="addEntry">Add Skill</button><br>
-                <button type="button" class="back-button">Back</button><br>
-                <button type="button" class="next-button">Next</button><br><br>
+                <div class="inside-form">
+                    <label for="skills">Enter Your Skills:</label><br>
+                    <input type="text" id="skills" name="skills" placeholder="Enter Skill"><br><br>
+
+                    <div class="bottom-buttons">
+                        <button type="button" class="add-entry" id="add-skills">Add Skill</button><br>
+                        <button type="button" class="back-button">Back</button><br>
+                        <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step5">
             <fieldset>
                 <legend>Languages</legend>
-                <label for="languages">Languages Spoken:</label><br>
-                <select id="languages" name="languages" required><br><br>
-                    <option value="">--Please Choose a Language--</option>
-                    <option value="arabic">Arabic</option>
-                    <option value="bengail">Bengail</option>
-                    <option value="chinese">Chinese(Mandarin)</option>
-                    <option value="dutch">Dutch</option>
-                    <option value="english">English</option>
-                    <option value="french">French</option>
-                    <option value="German">Gernam</option>
-                    <option value="hindi">Hindi</option>
-                    <option value="indonesian">Indonesian</option>
-                    <option value="italian">Italian</option>
-                    <option value="japanese">Japanese</option>
-                    <option value="javanese">Javanese</option>
-                    <option value="korean">Korean</option>
-                    <option value="malay">Malay</option>
-                    <option value="marathi">Marathi</option>
-                    <option value="persian">Persian(Farsi)</option>
-                    <option value="portuguese">Portuguese</option>
-                    <option value="punjabi">Punjabi</option>
-                    <option value="russian">Russian</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="swahili">Swahili</option>
-                    <option value="tamil">Tamil</option>
-                    <option value="telugu">Telugu</option>
-                    <option value="turkish">Turkish</option>
-                    <option value="urdu">Urdu</option>
-                    <option value="vietnamese">Vietnamese</option>
 
-                </select>
+                <div class="inside-form">
+                    <label for="languages">Languages Spoken:</label><br>
+                    <select id="languages" name="languages" required><br><br>
+                        <option value="">--Please Choose a Language--</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="bengail">Bengail</option>
+                        <option value="chinese">Chinese(Mandarin)</option>
+                        <option value="dutch">Dutch</option>
+                        <option value="english">English</option>
+                        <option value="french">French</option>
+                        <option value="German">Gernam</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="indonesian">Indonesian</option>
+                        <option value="italian">Italian</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="javanese">Javanese</option>
+                        <option value="korean">Korean</option>
+                        <option value="malay">Malay</option>
+                        <option value="marathi">Marathi</option>
+                        <option value="persian">Persian(Farsi)</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="punjabi">Punjabi</option>
+                        <option value="russian">Russian</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="swahili">Swahili</option>
+                        <option value="tamil">Tamil</option>
+                        <option value="telugu">Telugu</option>
+                        <option value="turkish">Turkish</option>
+                        <option value="urdu">Urdu</option>
+                        <option value="vietnamese">Vietnamese</option>
+                    </select>
 
-                <button type="button"class="addEntry">Add language</button><br>
-                <button type="button" class="back-button">Back</button><br>
-                <button type="button" class="next-button">Next</button><br><br>
+                    <div class="bottom-buttons">
+                        <button type="button" class="add-entry" id="add-language">Add Language</button><br>
+                        <button type="button" class="back-button">Back</button><br>
+                        <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step6">
             <fieldset>
                 <legend>References</legend>
-                <label for="references">Reference Name:</label><br>
-                <input type="text" id="references" name="references" placeholder="First and Last Name"><br><br>
-                
-                <label for="reference-phone">Reference Phone Number</label><br>
-                <input type="tel" id="reference-phone" name="reference-phone" placeholder="Phone Number"><br><br>
 
-                <label for="reference-email">Reference Email</label><br>
-                <input type="email" id="reference-email" name="reference-email" placeholder="email@email.com"><br><br>
+                <div class="inside-form">
+                    <label for="references">Reference Name:</label><br>
+                    <input type="text" id="references" name="references" placeholder="First and Last Name"><br><br>
+                    
+                    <label for="reference-phone">Reference Phone Number</label><br>
+                    <input type="tel" id="reference-phone" name="reference-phone" placeholder="123-456-7890"><br><br>
 
-                <button type="button" class="addEntry">Add Reference</button><br>
-                <button type="button" class="back-button">Back</button><br>
-                <button type="button" class="next-button">Next</button><br><br>
+                    <label for="reference-email">Reference Email</label><br>
+                    <input type="email" id="reference-email" name="reference-email" placeholder="email@email.com"><br><br>
+
+                    <div class="bottom-buttons">
+                        <button type="button" class="add-entry" id="add-reference">Add Reference</button><br>
+                        <button type="button" class="back-button">Back</button><br>
+                        <button type="button" class="next-button">Next</button><br>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <div class="step step7">
             <fieldset>
                 <legend>Profile</legend>
-                <label for="profile">Profile:</label><br>
-                <input type="text" id="profile" name="profile" placeholder="Type a little about you"><br><br>
 
-                <button type="button" class="back-button">Back</button><br>
-                <button type="submit" class="submitButton">Submit</button>
+                <div class="inside-form">
+                    <label for="profile">Personal Profile:</label><br>
+                    <input type="text" id="profile" name="profile" placeholder="Type a little about you"><br><br>
+
+                    <div class="bottom-buttons">
+                        <button type="button" class="back-button" id="add-profile">Back</button><br>
+                        <button type="submit" class="submitButton">Submit</button>
+                    </div>
+                </div>
             </fieldset>
         </div>
         <!-- figure out localStorage so these can all be saved so if a person leaves the page they don't have to redo the entire form again!!! -->
     </form>
 </body>
 <footer>
-    <p class="contact-me">&copy; Bryson Webb<br> Contact: <a href="web17029@byui.edu">bryson@email.com</a></p>
-    <p class="contact-me">Chelsea Saunders<br> Contact: <a href="sau24003@byui.edu">chelsea@email.com</a></p>
+    <p class="contact-me">&copy; Bryson Webb<br> Contact Email: <a href="web17029@byui.edu">bryson@email.com</a></p>
+    <p class="contact-me">Chelsea Saunders<br> Contact Email: <a href="sau24003@byui.edu">chelsea@email.com</a></p>
 </footer>
 </html>
