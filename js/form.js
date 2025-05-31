@@ -13,7 +13,7 @@ function showWhichStep(index) {
     steps.forEach((step, i) => {
         step.classList.toggle("active", i === index);
     });
-}
+} 
 
 // function to format phone number input
 function formatPhoneNumber(event) {
