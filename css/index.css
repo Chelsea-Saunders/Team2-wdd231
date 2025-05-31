@@ -1,3 +1,5 @@
+@import "./partials/variables.css";
+
 .drop-down {
     display: grid;
     justify-content: center;
@@ -12,7 +14,7 @@ form {
 }
 
 select {
-    background-color: lightgray;
+    background-color: var(--background-color);
     font-weight: bold;
     padding: 5px;
     font-size: 12px;

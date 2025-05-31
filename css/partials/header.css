@@ -1,8 +1,10 @@
+@import "./partials/variables.css";
+
 nav {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: rgb(122, 123, 116);
+    background-color: var(--secondary-color);
     padding: 20px;
     margin: 10px;
     font-size: 25px;
