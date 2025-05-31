@@ -30,6 +30,7 @@ fieldset {
 .inside-form {
     padding: 20px;
 }
+
 label {
     font-family: var(--body-font);
     font-size: .8em;

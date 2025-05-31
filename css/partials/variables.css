@@ -1,4 +1,17 @@
 :root {
     --header-font: Georgia, Garamond, serif;
     --body-font: Helvetica, Arial, sans-serif;
+
+    /* Colors */
+    --background-color: rgb(237, 246, 224);
+    --primary-color: #0044cc;
+    --secondary-color: #66aaff;
+
+    /* Spacing */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 32px;
+
+    /* Other variables */
+    --border-radius: 5px;
 }
