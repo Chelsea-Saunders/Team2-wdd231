@@ -8,7 +8,7 @@ async function fetchQuote() {
         headers: {
         "X-Api-Key": "AFNWi98lMT0sEK0Mt/YtYw==5L3iTaRKERtDIExX"
     }
-});
+});  
 
     if (!response.ok) 
     {

@@ -7,6 +7,9 @@
     --primary-color: rgb(12, 11, 11);
     --secondary-color: rgb(122, 123, 116);
     --accent-color: rgb(189, 255, 189);
+    --fieldset-background: rgb(250, 252, 242);
+    --fieldset-border: rgb(184, 182, 182);
+    --box-shadow: rgba(0, 0, 0, 0.3);
 
     /* Spacing */
     --spacing-small: 8px;
@@ -15,4 +18,5 @@
 
     /* Other variables */
     --border-radius: 5px;
+    --border-raidus-large: 8px;
 }

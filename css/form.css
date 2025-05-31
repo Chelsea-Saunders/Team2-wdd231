@@ -2,13 +2,13 @@ header {
     font-family: var(--header-font);
 }
 body {
-    background-color: rgb(237, 246, 224);
+    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
     align-items: left;
 }
 h1 {
-    font-family: var(--header-font);
+    font-family: var(--header-fosnt);
     font-size: 1.7em;
     width: 80%;
     margin: 0 auto;
@@ -22,35 +22,34 @@ legend {
 fieldset {
     width: 80%;
     margin: 0 auto;
-    background-color: rgb(250, 252, 242);
-    border-radius: 8px;
-    border: solid .5px rgb(184, 182, 182);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: var(--fieldset-background);;
+    border-radius: var(--border-radius-large);
+    border: solid .5px var(--fieldset-border);
+    box-shadow: 0 0 10px var(--box-shadow);
 }
 .inside-form {
     padding: 20px;
 }
-
 label {
     font-family: var(--body-font);
     font-size: .8em;
     font-weight: 400;
     padding-top: 100px;
-} 
+}
 input {
-    border: solid 1px rgb(0, 0, 0);
-    border-radius: 8px;
+    border: solid 1px var(--primary-color);
+    border-radius: var(--border-radius-large);
     font-family: var(--body-font);
     font-weight: 400;
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
     cursor: pointer;
-} 
+}
 input:hover {
-    background-color: rgb(237, 246, 224);
-    border: 1px solid rgb(0, 0, 0);
-    color: rgb(0, 0, 0);
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 #languages {
     margin-bottom: 25px;
@@ -64,16 +63,16 @@ input:hover {
     margin: 0 auto;
 }
 button {
-    background-color: rgb(250, 252, 242);
-    border: solid 1px rgb(0, 0, 0);
-    border-radius: 8px;
+    background-color: var(--fieldset-background);
+    border: solid 1px var(--primary-color);
+    border-radius: var(--border-radius-large);;
     font-weight: 250;
     cursor: pointer;
     padding: 5px 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px var(--box-shadow);
 }
 button:hover {
-    background-color: black;
+    background-color: var(--primary-color);
     color: white;
 }
 /* this will hide or show the next/back step  */

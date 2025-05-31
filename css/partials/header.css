@@ -36,28 +36,28 @@ nav ul li {
 }
 
 @media (max-width: 768px) {
-nav {
-    flex-direction: column;
-    align-items: flex-start;
-}
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-li {
-    align-self: center;
-}
+    li {
+        align-self: center;
+    }
 
-nav ul {
-    display: none; 
-    flex-direction: column;
-    width: 100%;
-    margin-top: 10px;
-}
+    nav ul {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
 
-.hamburger {
-    display: block; 
-    align-self: center;
-}
+    .hamburger {
+        display: block; 
+        align-self: center;
+    }
 
-nav ul.active {
-    display: flex;
-}
+    nav ul.active {
+        display: flex;
+    }
 }
