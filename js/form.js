@@ -34,13 +34,18 @@ function formatPhoneNumber(event) {
 // event listener for phone input to only allow numbers
 phoneInput.addEventListener("input", formatPhoneNumber);
 
-// this function will show and hide steps in the form
+// this function will show and hide steps in the form and fade in...more smooth and less dramatic
 function showStep(index) {
     steps.forEach((step, i) => {
+        // step.classList.toggle("active", i === index);
         if (i === index) {
             step.classList.add("active");
+            step.style.opacity = "1";
+            step.style.pointerEvents = "auto";
         } else {
             step.classList.remove("active");
+            step.style.opacity = "0";
+            step.style.pointerEvents = "none";
         }
     });
 }
@@ -85,6 +90,59 @@ function newFormEntry(container, field) {
     container.insertBefore(newEntry, bottomButtons);
 }
 
+// clear data from from function
+function clearFormData() {
+    localStorage.removeItem("formData");
+
+    steps.forEach(step => {
+        const inputs = step.querySelectorAll("input, textarea, select");
+        inputs.forEach(input => {
+            input.value = "";
+        });
+    });
+        currentStep = 0;
+        showStep(currentStep);
+}
+
+function clearCurrentPage() {
+    const currentStepElement = steps[currentStep];
+
+    // clear all inputs
+    const inputs = currentStepElement.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => input.value = "");
+
+    // wrap each added entry in field so it can be removed
+    const extraFields = currentStepElement.querySelectorAll(".form-entry");
+    extraFields.forEach(entry => entry.remove());
+
+    saveFormData(); // update localStorage with cleared values
+}
+//reload saved input fields
+function loadFormData() {
+    const savedData = JSON.parse(localStorage.getItem("formData"));
+    if (!savedData) return;
+
+    steps.forEach((step) => {
+        const inputs = step.querySelectorAll("input, textarea, select");
+        inputs.forEach((input) => {
+            if(input.name && savedData[input.name]) {
+                input.value = savedData[input.name];
+            }
+        });
+    });
+}
+loadFormData(); // call this to reload input into form when page loads
+// this funtion will handle the back button
+backButton.forEach(btn => {
+    btn.addEventListener("click", () => {
+        saveFormData(); // save progress to local storage before going back
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+});
+showStep(currentStep); // show the first step initially
 // Employment History Form event listener
 document.querySelector("#add-work-experience").addEventListener("click", function() {
     // find the specific container related to the clicked button
@@ -209,56 +267,7 @@ document.querySelector("#add-language").addEventListener("click", function() {
         insideForm.insertBefore(select, bottomButtons);
         insideForm.insertBefore(br2, bottomButtons);
 });
-//reload saved input fields
-function loadFormData() {
-    const savedData = JSON.parse(localStorage.getItem("formData"));
-    if (!savedData) return;
 
-    steps.forEach((step) => {
-        const inputs = step.querySelectorAll("input, textarea, select");
-        inputs.forEach((input) => {
-            if(input.name && savedData[input.name]) {
-                input.value = savedData[input.name];
-            }
-        });
-    });
-}
-loadFormData(); // call this to reload input into form when page loads
-// this funtion will handle the back button
-backButton.forEach(btn => {
-    btn.addEventListener("click", () => {
-        saveFormData(); // save progress to local storage before going back
-        if (currentStep > 0) {
-            currentStep--;
-            showStep(currentStep);
-        }
-    });
-});
-showStep(currentStep); // show the first step initially
-
-// clear data from from function
-function clearFormData() {
-    localStorage.removeItem("formData");
-
-    steps.forEach(step => {
-        const inputs = step.querySelectorAll("input, textarea, select");
-        inputs.forEach(input => {
-            input.value = "";
-        });
-    });
-
-        currentStep = 0;
-        showStep(currentStep);
-}
-function clearCurrentPage() {
-    const currentStepElement = steps[currentStep];
-    const inputs = currentStepElement.querySelectorAll("input, textarea, select");
-
-    inputs.forEach(input => {
-        input.value = "";
-    });
-    saveFormData(); // update localStorage with cleared values
-}
 // event listener to clear the entire form
 document.querySelector("#clear-button").addEventListener("click", clearFormData);
 
@@ -317,6 +326,21 @@ document.querySelectorAll(".next-button").forEach(function(button) {
         currentStep++; // move to the next step
         showStep(currentStep); // show the next step
     });
+});
+
+document.querySelector("#multiStepForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // stopfrom reloading page
+
+    saveFormData(); // save data to this point
+
+    // show data is saved
+    alert("Resume Submitted! Thank You!");
+
+    // clear local storage
+    localStorage.removeItem("formData");
+
+    // reset form
+    this.reset();
 });
 
 setupHamburgerMenu();
