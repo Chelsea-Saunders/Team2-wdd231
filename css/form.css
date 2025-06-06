@@ -3,9 +3,10 @@ header {
 }
 body {
     background-color: var(--background-color);
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+    font-family: var(--body-font);
+    display: block;
+    margin: 0;
+    padding: 0;
 }
 h1 {
     font-family: var(--header-fosnt);
@@ -23,38 +24,96 @@ fieldset {
     width: 80%;
     margin: 0 auto;
     background-color: var(--fieldset-background);;
-    border-radius: var(--border-radius-large);
+    border-radius: 8px;
     border: solid .5px var(--fieldset-border);
     box-shadow: 0 0 10px var(--box-shadow);
+    position: relative;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
 }
 .inside-form {
-    padding: 20px;
+    margin-bottom: 1rem;
 }
 label {
     font-family: var(--body-font);
     font-size: .8em;
     font-weight: 400;
-    padding-top: 100px;
+    margin-bottom: 5px;
+    display: block;
+    position: relative;
 }
 input {
     border: solid 1px var(--primary-color);
-    border-radius: var(--border-radius-large);
+    border-radius: 5px;
     font-family: var(--body-font);
     font-weight: 400;
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
     cursor: pointer;
+    position: relative;
 }
 input:hover {
     background-color: var(--background-color);
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
 }
+input.error {
+    border: 2px solid red;
+}
+.form-entry {
+    margin-bottom: 2rem;
+}
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.form-group label {
+    font-weight: bold;
+}
+.form-group input {
+    padding: 0.25rem;
+    font-size: 0.9em;
+}
+.field-set {
+    margin-bottom: 2rem;
+}
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    position: absolute;
+}
 #languages {
     margin-bottom: 25px;
     padding: 5px;
-    width: 90%;
+    width: 100%;
+}
+#languages select {
+    padding: 5px;
+    font-family: var(--body-font);
+    width: 100%;
+    font-size: 0.9em;
+}
+.inside-form select {
+    width: 100%; 
+    padding: 5px;
+    font-size: 0.9em;
+    font-family: var(--body-font);
+    border-radius: 5px;
+    border: solid 1px var(--primary-color);
 }
 .bottom-buttons {
     display: flex;
@@ -65,7 +124,7 @@ input:hover {
 button {
     background-color: var(--fieldset-background);
     border: solid 1px var(--primary-color);
-    border-radius: var(--border-radius-large);;
+    border-radius: 5px;
     font-weight: 250;
     cursor: pointer;
     padding: 5px 10px;
@@ -77,18 +136,33 @@ button:hover {
 }
 /* this will hide or show the next/back step  */
 .step {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 3s ease;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
     display: none;
+    padding-top: 50px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
 }
 .step.active {
     display: block;
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 1;
+    pointer-events: auto;
 }
-/* input-error {
-    border: 2px solid red;
-    background-color: rgb(255, 235, 235);
-    color: red;
-    font-weight: 400;
-    padding: 5px;
-} */
+.step-wrapper {
+    position: relative;
+    min-height: 650px;
+    height: auto;
+    overflow: visible;
+}
 
 @media (min-width: 700px) {
     .bottom-buttons {

@@ -1,19 +1,12 @@
+import { setupHamburgerMenu } from "./index.js";
 
-const form = document.querySelector("#multiStepForm"); // this is the form element
+// const form = document.querySelector("#multiStepForm"); // this is the form element
 const phoneInput = document.querySelector("#phone"); // this is the phone input field
 const steps = document.querySelectorAll(".step"); // this will target all the step elements in the form
-const nextButton = document.querySelectorAll(".next-button"); // this is the next button element
 const backButton = document.querySelectorAll(".back-button"); // this is the previous button element
 
 
 let currentStep = 0; // this will keep track of which step the user is on in the form
-
-// controle when to view each step
-function showWhichStep(index) {
-    steps.forEach((step, i) => {
-        step.classList.toggle("active", i === index);
-    });
-} 
 
 // function to format phone number input
 function formatPhoneNumber(event) {
@@ -44,29 +37,13 @@ phoneInput.addEventListener("input", formatPhoneNumber);
 // this function will show and hide steps in the form
 function showStep(index) {
     steps.forEach((step, i) => {
-        step.style.display = (i === index) ? "block" : "none";
+        if (i === index) {
+            step.classList.add("active");
+        } else {
+            step.classList.remove("active");
+        }
     });
 }
-
-// this function will handle the next button
-nextButton.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
-});
-// this funtion will handle the back button
-backButton.forEach(btn => {
-    btn.addEventListener("click", () => {
-        if (currentStep > 0) {
-            currentStep--;
-            showStep(currentStep);
-        }
-    });
-});
-showStep(currentStep); // show the first step initially
 
 // save user input to local storage
 function saveFormData() {
@@ -84,21 +61,25 @@ function saveFormData() {
 // function for normal form entries
 function newFormEntry(container, field) {
     const newEntry = document.createElement("div");
+    newEntry.classList.add("form-entry"); // add a class for styling
 
     field.forEach(function(field) {
+        const group = document.createElement("div");
+        group.classList.add("form-group");
+
         const label = document.createElement("label");
         label.textContent = field.label;
+
         const input = document.createElement("input");
         input.type = field.type;
         input.name = field.name;
         input.placeholder = field.placeholder;
 
-        newEntry.appendChild(label);
-        newEntry.appendChild(document.createElement("br"));
-        newEntry.appendChild(input);
-        newEntry.appendChild(document.createElement("br"));
-        newEntry.appendChild(document.createElement("br"));
+        group.appendChild(label);
+        group.appendChild(input);
+        newEntry.appendChild(group);
     });
+
     //append the new entry before the bottom buttons
     const bottomButtons = container.querySelector(".bottom-buttons");
     container.insertBefore(newEntry, bottomButtons);
@@ -228,6 +209,64 @@ document.querySelector("#add-language").addEventListener("click", function() {
         insideForm.insertBefore(select, bottomButtons);
         insideForm.insertBefore(br2, bottomButtons);
 });
+//reload saved input fields
+function loadFormData() {
+    const savedData = JSON.parse(localStorage.getItem("formData"));
+    if (!savedData) return;
+
+    steps.forEach((step) => {
+        const inputs = step.querySelectorAll("input, textarea, select");
+        inputs.forEach((input) => {
+            if(input.name && savedData[input.name]) {
+                input.value = savedData[input.name];
+            }
+        });
+    });
+}
+loadFormData(); // call this to reload input into form when page loads
+// this funtion will handle the back button
+backButton.forEach(btn => {
+    btn.addEventListener("click", () => {
+        saveFormData(); // save progress to local storage before going back
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+});
+showStep(currentStep); // show the first step initially
+
+// clear data from from function
+function clearFormData() {
+    localStorage.removeItem("formData");
+
+    steps.forEach(step => {
+        const inputs = step.querySelectorAll("input, textarea, select");
+        inputs.forEach(input => {
+            input.value = "";
+        });
+    });
+
+        currentStep = 0;
+        showStep(currentStep);
+}
+function clearCurrentPage() {
+    const currentStepElement = steps[currentStep];
+    const inputs = currentStepElement.querySelectorAll("input, textarea, select");
+
+    inputs.forEach(input => {
+        input.value = "";
+    });
+    saveFormData(); // update localStorage with cleared values
+}
+// event listener to clear the entire form
+document.querySelector("#clear-button").addEventListener("click", clearFormData);
+
+// event listener to clear the individual page
+document.querySelectorAll(".clear-page").forEach (button => {
+    button.addEventListener("click", clearCurrentPage);
+});
+
 // make sure all required fields are filled before next step
 document.querySelectorAll(".next-button").forEach(function(button) {
     button.addEventListener("click", function() {
@@ -237,26 +276,47 @@ document.querySelectorAll(".next-button").forEach(function(button) {
         let allFilled = true;
 
         requiredInputs.forEach((requiredInput) => {
-            if (!requiredInput.checkValidity()) {
+            const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
+
+            // remove any existing error message
+            let existingMessage = requiredInput.nextElementSibling;
+            if (existingMessage && existingMessage.classList.contains("error-message")) {
+                existingMessage.remove();
+            }
+
+            if (!requiredInput.value.trim()) {
                 allFilled = false;
                 requiredInput.classList.add("error"); // add error class for styling 
+
+                // create error message
+                const message = document.createElement("div");
+                message.className = "error-message";
+                message.textContent = `Required: ${fieldName}`;
+                requiredInput.after(message);
+
+                requestAnimationFrame(() => {
+                    message.classList.add("show");
+                });
             } else {
                 requiredInput.classList.remove("error"); // remove error class if filled 
             }
         });
-        if (allFilled) {
-            saveFormData(); // save data to local storage
-            currentStep++; // move to the next step
-            showStep(currentStep); // show the next step
-        } else {
-            alert("Please fill out all required fields before proceeding.");
+
+        saveFormData();
+
+        if (!allFilled) {
+            const firstInvalid = currentStepElement.querySelector("input.error", "select.error", "textarea.error");
+            if (firstInvalid) {
+                firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+                firstInvalid.focus();
+            }
+            return; // this will stop everything here if not valid.
         }
+        // all required fields are fille...go to next step
+        saveFormData(); // save data to local storage
+        currentStep++; // move to the next step
+        showStep(currentStep); // show the next step
     });
 });
 
-const hamburger = document.querySelector(`.hamburger`);
-const navLinks = document.querySelector(`nav ul`);
-
-hamburger.addEventListener('click', () => {
-navLinks.classList.toggle('active');
-});
+setupHamburgerMenu();
