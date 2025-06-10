@@ -3,13 +3,14 @@
     --body-font: Helvetica, Arial, sans-serif;
 
     /* Colors */
-    --background-color: rgb(237, 246, 224);
-    --primary-color: rgb(12, 11, 11);
-    --secondary-color: rgb(122, 123, 116);
-    --accent-color: rgb(189, 255, 189);
-    --fieldset-background: rgb(250, 252, 242);
-    --fieldset-border: rgb(184, 182, 182);
-    --box-shadow: rgba(0, 0, 0, 0.3);
+    --background-color: rgb(237, 246, 224); /* #EDF6E0 */
+    --primary-color: rgb(12, 11, 11); /* #0C0B0B */
+    --secondary-color: rgb(122, 123, 116); /* #7A7B74 */
+    --highligh-color: #008000;
+    --fieldset-background: rgb(250, 252, 242); /* #FAFCF2 */
+    --fieldset-border: rgb(184, 182, 182); /* #B8B6B6 */
+    --box-shadow: rgba(0, 0, 0, 0.3); /* #0000004D */
+    --error-color: rgb(255, 0, 0); /* #FF0000 */
 
     /* Spacing */
     --spacing-small: 8px;

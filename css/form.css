@@ -158,20 +158,6 @@ button:hover {
     transition: opacity 0.5s ease;
     z-index: 0;
     pointer-events: none;
-    /* opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    position: absolute;
-    backface-visibility: hidden;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-top: 50px;
-    z-index: 0;
-    pointer-events: none;
-    overflow: visible; */
 }
 .step.active {
     /* display: block; */
@@ -186,13 +172,6 @@ button:hover {
     width: 100%;
     height: auto;
     overflow: visible;
-    /* flex: 1;
-    perspective: 1000px;
-    position: relative;
-    min-height: 750px;
-    height: auto;
-    overflow: visible;
-    transition: height 0.3s ease; */
 }
 #multiStepForm {
     width: 100%;

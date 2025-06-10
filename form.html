@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A website to create a resume and for employers to compare resumes.">
     <link rel="stylesheet" href="./css/form.css">
     <link rel="stylesheet" href="./css/main.css">
     <script type="module" src="./js/form.js" defer></script>
+    <script type="module" src="./js/main.js" defer></script>
     <title>Resume Form</title>
 </head>
 <body>
@@ -16,6 +18,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="form.html">Form Page</a></li>
+                <li><a href="#" id="main-login">Login</a></li>
             </ul>
         </nav> 
     </header>
@@ -23,7 +26,7 @@
         <div class="step-wrapper">
             <div class="step step-1 active">
                 <fieldset>
-                    <h3>Contact Information</h3>
+                    <h2>Contact Information</h2>
                     <legend class="visually-hidden">Contact Information</legend>
                     <div class="inside-form">
                         <label for="name">Name:</label>
@@ -47,7 +50,7 @@
             </div>
             <div class="step step2">
                 <fieldset>
-                    <h3>Work Experience: </h3>
+                    <h2>Work Experience: </h2>
                     <legend class="visually-hidden">Work Experience</legend>
 
                     <div class="inside-form">
@@ -71,7 +74,7 @@
             </div>
             <div class="step step3">
                 <fieldset>
-                    <h3>Education Experience:</h3>
+                    <h2>Education Experience:</h2>
                     <legend class="visually-hidden">Education Experience</legend>
                     <div class="inside-form">
 
@@ -95,7 +98,7 @@
             </div>
             <div class="step step4">
                 <fieldset>
-                    <h3>Skills You Have</h3>
+                    <h2>Skills You Have</h2>
                     <legend class="visually-hidden">Skills You Have</legend>
 
                     <div class="inside-form">
@@ -113,7 +116,7 @@
             </div>
             <div class="step step5">
                 <fieldset>
-                    <h3>Languages</h3>
+                    <h2>Languages</h2>
                     <legend class="visually-hidden">Languages</legend>
 
                     <div class="inside-form">
@@ -158,7 +161,7 @@
             </div>
             <div class="step step6">
                 <fieldset>
-                    <h3>Reference</h3>
+                    <h2>Reference</h2>
                     <legend class="visually-hidden">References</legend>
 
                     <div class="inside-form">
@@ -182,7 +185,7 @@
             </div>
             <div class="step step7">
                 <fieldset>
-                    <h3>Profile</h3>
+                    <h2>Profile</h2>
                     <legend class="visually-hidden">Profile</legend>
 
                     <div class="inside-form">
@@ -199,8 +202,68 @@
                 </fieldset>
             </div>
         </div>
-        <!-- figure out localStorage so these can all be saved so if a person leaves the page they don't have to redo the entire form again!!! -->
     </form>
+    <!-- Login modal -->
+    <div class="modal hidden" id="login-modal">
+        <div 
+        class="modal-content"
+        id="modal"
+        role="dialog"
+        aria-labelledby="login-title" 
+        aria-modal="true"
+        >
+        <section class="login-info-form">
+            <span class="close-button" aria-label="Close modal">&times;</span>
+            <p>Don't have an account? Create one <a href="#" id="open-create-account">here</a>.</p>
+            <h2 id="login-title">Login</h2> <!-- This MUST be the same as the aria-labelledby!!! -->
+            <form>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="login-email">
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password">
+
+                <button type="submit">Login</button>
+                <p id="login-message" class="status-message"></p>
+            </form>
+        </section>
+        </div>
+    </div>
+    <!-- Create Account Modal -->
+    <div class="modal hidden" id="register-modal">
+        <div
+            class="register-content"
+            id="register-mod"
+            role="dialog"
+            aria-labelledby="register-title"
+            aria-modal="true"
+            >
+            <section class="registration-form">
+                <span class="x-button" id="x-button" aria-label="Close modal">&times;</span>
+                <h2 id="register-title">Create Your Account</h2>
+                <form>
+                    <label for="reg-name">Name:</label>
+                    <input type="text" id="reg-name" name="reg-name" placeholder="First and Last Name" required/>
+                    <span class="error-message" id="name-error"></span>
+
+                    <label for="reg-email">Email:</label>
+                    <input type="email" id="reg-email" name="reg-email" placeholder="email@email.com" required/>
+                    <span class="error-message" id="email-error"></span>
+
+                    <label for="reg-password">Password:</label>
+                    <input type="password" id="reg-password" name="reg-password" placeholder="Password" required/>
+                    <span class="error-message" id="password-error"></span>
+
+                    <label for="re-ent-pwd">Re-Enter Password:</label>
+                    <input type="password" id="re-ent-pwd" name="re-ent-pwd" placeholder="Re-enter Password" required/>
+                    <span class="error-message" id="re-password-error"></span>
+
+                    <button type="submit">Create Account</button>
+                    <p id="reg-message" class="status-message"></p>
+                </form>
+            </section>
+        </div>
+    </div>
 </body>
 <footer>
     <p class="contact-me">&copy; Bryson Webb<br> Contact Email: <a href="web17029@byui.edu">bryson@email.com</a></p>
