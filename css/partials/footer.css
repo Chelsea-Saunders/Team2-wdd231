@@ -1,0 +1,14 @@
+footer {
+    text-align: center;
+    background-color: rgb(122, 123, 116);
+    color: white;
+    font-family: Georgia;
+    font-size: 0.7em;
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+}
+a {
+    color: rgb(189, 255, 189);
+    text-decoration: none;
+} 

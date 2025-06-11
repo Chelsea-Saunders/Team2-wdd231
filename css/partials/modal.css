@@ -1,0 +1,112 @@
+a#open-create-account {
+    color: green;
+    text-decoration: underline;
+    font-weight: bold;
+}
+#login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center; 
+    z-index: 1000;
+}
+#login-modal.open {
+    display: flex;
+}
+.login-info-form {
+    background-color: #fefefe;
+    color: #333;
+    padding: 2rem;
+    max-width: 500px;
+    width: 70%;
+    position: relative;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 1px solid #888;
+    border-radius: 8px;
+}
+.login-info-form button {
+    display: block;
+    margin: 1rem auto 0 auto;
+}
+/* X close button */
+.close-button {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    color: #aaa;
+    font-size: 1.5rem;
+}
+.close-button:hover {
+    color: black;
+    cursor: pointer;
+}
+#register-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center; 
+    z-index: 1000;
+}
+#register-modal.open {
+    display: flex;
+}
+.registration-form {
+    background-color: #fefefe;
+    color: #333;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 1px solid #888;
+    border-radius: 8px;
+}
+.registration-form button {
+    display: block;
+    margin: 1rem auto 0 auto;
+}
+/* X close button */
+.x-button {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    color: #aaa;
+    font-size: 1.5rem;
+}
+.x-button:hover {
+    color: black;
+    cursor: pointer;
+}
+input.error {
+    border: 2px solid red;
+}
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.25rem;
+    display: block;
+}
+.status-message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.status-message.success {
+    color: green;
+}
+.status-message.error {
+    color: red;
+}
+label {
+    margin-top: 1.3rem;
+}
