@@ -1,4 +1,5 @@
 const quoteTextElement = document.querySelector(".quote-text");
+console.log("quoteTextElement", quoteTextElement);
 
 async function fetchQuote() {
     try 

@@ -28,15 +28,26 @@ a#open-create-account {
     margin: 15% auto; /* 15% from the top and centered */
     border: 1px solid #888;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+form {
+    border: none;
 }
 .login-info-form button {
     display: block;
     margin: 1rem auto 0 auto;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
 }
+
 /* X close button */
 .close-button {
     position: absolute;
-    top: 5%;
+    top: 2%;
     right: 5%;
     color: #aaa;
     font-size: 1.5rem;
@@ -45,6 +56,8 @@ a#open-create-account {
     color: black;
     cursor: pointer;
 }
+
+/* Registration/create account Modal */
 #register-modal {
     display: none;
     position: fixed;
@@ -52,7 +65,7 @@ a#open-create-account {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.12);
     justify-content: center;
     align-items: center; 
     z-index: 1000;
@@ -65,16 +78,17 @@ a#open-create-account {
     color: #333;
     padding: 2rem;
     max-width: 500px;
-    width: 90%;
+    width: 70%;
     position: relative;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; 
     border: 1px solid #888;
     border-radius: 8px;
 }
 .registration-form button {
     display: block;
-    margin: 1rem auto 0 auto;
+    margin: 1.5rem auto 0 auto;
 }
+
 /* X close button */
 .x-button {
     position: absolute;
@@ -87,6 +101,8 @@ a#open-create-account {
     color: black;
     cursor: pointer;
 }
+
+/* error styles */
 input.error {
     border: 2px solid red;
 }

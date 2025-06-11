@@ -1,3 +1,5 @@
+console.log("form.js loaded");
+
 import { setupHamburgerMenu } from "./index.js";
 
 // const form = document.querySelector("#multiStepForm"); // this is the form element
@@ -32,6 +34,13 @@ function formatPhoneNumber(event) {
 }
 
 // event listener for phone input to only allow numbers
+// document.addEventListener("DOMContentLoaded", () => {
+//     const phoneInput = document.querySelector("#phone");
+
+//     if (phoneInput) {
+//         phoneInput.addEventListener("input", formatPhoneNumber);
+//     }
+// });
 phoneInput.addEventListener("input", formatPhoneNumber);
 
 // this function will show and hide steps in the form and fade in...more smooth and less dramatic
