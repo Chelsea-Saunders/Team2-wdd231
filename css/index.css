@@ -1,4 +1,7 @@
 @import "./partials/variables.css";
+main {
+    font-family: var(--body-font);
+}
 
 .drop-down {
     display: grid;
@@ -7,10 +10,11 @@
     padding-bottom: 10px;
 }  
 
-form {
+main form {
     padding: 15px;
+    background-color: var(--fieldset-background);
     border: solid black 2px;
-    background-color: white;
+    border-radius: 10px;
 } 
 
 select {
@@ -27,17 +31,23 @@ select {
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.resume1, .resume2, .resume3 {
+.resume-card {
     justify-self: center;
     border: solid black 2px;
+    border-radius: 10px;
     padding: 50px;
     margin: 30px;
+    width: 400px;
+    height: 250px;
+    background-color: var(--fieldset-background);
 }
 
 .motivation-section {
     border: solid black 2px;
+    border-radius: 30px;
     padding: 30px;
     margin: 15px;
+    background-color: var(--fieldset-background);
 }
 
 .motivation {
@@ -45,6 +55,45 @@ select {
     grid-template-columns: 1fr;
     justify-self: center;   
 }
+
+h1 {
+    font-family: var(--header-font);
+    font-size: 2em;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--fieldset-background);
+    padding: 30px;
+    margin: 0 auto;
+    width: 70%;
+    height: 90%;
+    border-radius: 10px;
+}
+
+.modal.show { 
+    display: flex;
+}
+
+.resume-card {
+    cursor: pointer;
+}
+
 
 @media (max-width: 768px) {
 
@@ -55,12 +104,12 @@ select {
         align-items: center;
     }
 
-    .resume1, .resume2, .resume3 {
-        width: 70%;
-        height: 150px;
-        border: solid black 2px;
+    .modal-content {
+        background-color: var(--fieldset-background);
         padding: 30px;
-        margin: 15px 0;
-        text-align: center;
+        margin: 0 auto;
+        width: 90%;
+        height: 90%;
+        border-radius: 10px;
     }
 }

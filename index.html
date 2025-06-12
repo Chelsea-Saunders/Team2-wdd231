@@ -7,10 +7,9 @@
     <title>Portfolios</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/main.css">
-    <!-- <script type="module" src="./js/form.js" defer></script> -->
     <script type="module" src="./js/main.js" defer></script>
 </head>
-<body>
+<body class="home-page">
     <header>
         <h1>Resume List</h1>
         <nav>
@@ -32,10 +31,114 @@
             </form>
         </div>
         <div class="resume-list">
-            <div class="resume1">Link to Resume</div>
-            <div class="resume2">Link to Resume</div>
-            <div class="resume3">Link to Resume</div>
+            <div class="resume-card" id="resume1">
+              <p class="name">Bryson Webb</p>
+              <p class="job">Software Engineer</p>
+              <p class="location">Austin, TX</p>
+            </div>
+          
+            <div class="resume-card" id="resume2">
+              <p class="name">Liam Davis</p>
+              <p class="job">UX Designer</p>
+              <p class="location">Seattle, WA</p>
+            </div>
+          
+            <div class="resume-card" id="resume3">
+              <p class="name">Noah Smith</p>
+              <p class="job">Data Analyst</p>
+              <p class="location">Chicago, IL</p>
+            </div>
         </div>
+        <!-- MODAL SECTION -->
+        <div class="modal" id="modal1">
+            <div class="modal-content">
+                <h2>Bryson Webb</h2>
+                <p><strong>Email:</strong> bryson.webb@example.com</p>
+                <p><strong>Phone:</strong> (512) 555-0192</p>
+                <p><strong>Address:</strong> 123 Barton Springs Rd, Austin, TX 78704</p>
+              
+                <h3>Work Experience</h3>
+                <p><strong>Software Engineer</strong> - TechWave Inc. (2021 - Present)</p>
+                <ul>
+                  <li>Developed full-stack web applications with React and Node.js</li>
+                  <li>Improved application load time by 30% through performance optimization</li>
+                </ul>
+              
+                <h3>Skills</h3>
+                <ul>
+                  <li>JavaScript</li>
+                  <li>SQL</li>
+                  <li>React</li>
+                </ul>
+              
+                <h3>Education</h3>
+                <p>Brigham Young University - BS in Computer Science (Graduated: April 2021)</p>
+              
+                <h3>Languages</h3>
+                <p>English, Spanish</p>
+            </div>              
+        </div>    
+        <!--SECOND HIDDEN MODAL-->
+          <div class="modal" id="modal2">
+            <div class="modal-content">
+                <h2>Liam Davis</h2>
+                <p><strong>Email:</strong> liam.davis@example.com</p>
+                <p><strong>Phone:</strong> (206) 555-0345</p>
+                <p><strong>Address:</strong> 456 Pine St, Seattle, WA 98101</p>
+              
+                <h3>Work Experience</h3>
+                <p><strong>UX Designer</strong> - CreativePixel Studio (2020 - Present)</p>
+                <ul>
+                  <li>Led user research and testing for client-facing web apps</li>
+                  <li>Designed responsive wireframes and prototypes in Figma</li>
+                  <li>Collaborated with developers to ensure design fidelity</li>
+                </ul>
+              
+                <h3>Skills</h3>
+                <ul>
+                  <li>Figma</li>
+                  <li>User Research</li>
+                  <li>HTML/CSS</li>
+                </ul>
+              
+                <h3>Education</h3>
+                <p>University of Washington - BA in Human-Centered Design (Graduated: June 2020)</p>
+              
+                <h3>Languages</h3>
+                <p>English, French</p>
+            </div>
+        </div>
+          
+        <div class="modal" id="modal3">
+            <div class="modal-content">
+                <h2>Noah Smith</h2>
+                <p><strong>Email:</strong> noah.smith@example.com</p>
+                <p><strong>Phone:</strong> (312) 555-0820</p>
+                <p><strong>Address:</strong> 789 Lakeshore Dr, Chicago, IL 60611</p>
+              
+                <h3>Work Experience</h3>
+                <p><strong>Data Analyst</strong> - Insight Metrics Co. (2019 - Present)</p>
+                <ul>
+                  <li>Analyzed large datasets to identify trends and improve client KPIs</li>
+                  <li>Built dashboards in Power BI and Tableau</li>
+                  <li>Automated reports using Python and SQL</li>
+                </ul>
+              
+                <h3>Skills</h3>
+                <ul>
+                  <li>SQL</li>
+                  <li>Power BI</li>
+                  <li>Python</li>
+                </ul>
+              
+                <h3>Education</h3>
+                <p>DePaul University - MS in Data Science (Currently Enrolled, Expected: 2025)</p>
+              
+                <h3>Languages</h3>
+                <p>English, German</p>
+            </div>              
+        </div>
+        <!-- Motivation Section -->
         <div class="motivation-section">
             <div class="motivation">Quote of the Day!</div>
             <p class="quote-text"></p>

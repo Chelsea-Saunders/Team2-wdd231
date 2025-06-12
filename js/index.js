@@ -1,4 +1,6 @@
 const quoteTextElement = document.querySelector(".quote-text");
+import { API_KEY } from "../apikey.js";
+console.log(API_KEY);
 console.log("quoteTextElement", quoteTextElement);
 
 async function fetchQuote() {
@@ -7,7 +9,7 @@ async function fetchQuote() {
         const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
         method: "GET",
         headers: {
-        "X-Api-Key": "AFNWi98lMT0sEK0Mt/YtYw==5L3iTaRKERtDIExX"
+        "X-Api-Key": API_KEY
     }
 });  
 
@@ -25,7 +27,7 @@ async function fetchQuote() {
     console.error("Quote fetch failed:", error);
   }
 }
-fetchQuote();
+
 
 export function setupHamburgerMenu() {
   const hamburger = document.querySelector(`.hamburger`);
@@ -37,3 +39,26 @@ export function setupHamburgerMenu() {
     });
   }
 }
+
+// MAIN PAGE MODAL FOR RESUMES
+document.querySelector("#resume1").addEventListener("click", () => {
+  document.getElementById("modal1").classList.add("show");
+});
+
+document.querySelector("#resume2").addEventListener("click", () => {
+  document.getElementById("modal2").classList.add("show");
+});
+
+document.querySelector("#resume3").addEventListener("click", () => {
+  document.getElementById("modal3").classList.add("show");
+});
+
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    if (!e.target.closest(".modal-content")) {
+      modal.classList.remove("show");
+    }
+  })
+})
+
+fetchQuote();
