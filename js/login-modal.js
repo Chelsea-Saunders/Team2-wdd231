@@ -171,11 +171,15 @@ export function createNewAccount() {
         // show confirmation and reset
         registerForm.reset();
         closeRegistrationForm();
-        if (typeof openModal === "function") openModal();
+        // if (typeof openModal === "function") openModal();
+        document.querySelector("#login-modal").classList.remove("hidden");
     });
 
     // function to open registration form
     function openRegistrationForm() {
+        // hide login modal when opening registration form
+        document.querySelector("#login-modal").classList.add("hidden");
+        
         createAccountModal.classList.remove("hidden");
         createAccountModal.classList.add("open");
         createAccountModal.setAttribute("aria-hidden", "false");
@@ -185,6 +189,18 @@ export function createNewAccount() {
         createAccountModal.classList.remove("open");
         createAccountModal.classList.add("hidden");
         createAccountModal.setAttribute("aria-hidden", "true");
+
+        // show modal again
+        document.querySelector("#login-modal").classList.remove("hidden");
+    }
+
+    function openRegistrationForm() {
+        // hide login modal when opening registration form
+        document.querySelector("#login-modal").classList.add("hidden");
+
+        createAccountModal.classList.remove("hidden");
+        createAccountModal.classList.add("open");
+        createAccountModal.setAttribute("aria-hidden", "false");
     }
 
     // add event listerner to submit button

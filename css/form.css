@@ -20,7 +20,7 @@ body {
     flex-direction: column;
 }
 h1 {
-    font-family: var(--header-fosnt);
+    font-family: var(--header-font);
     font-size: 1.7em;
     width: 80%;
     margin: 0 auto;

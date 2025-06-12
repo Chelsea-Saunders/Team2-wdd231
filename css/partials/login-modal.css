@@ -3,7 +3,19 @@ a#open-create-account {
     text-decoration: underline;
     font-weight: bold;
 }
-#login-modal {
+.home-page #login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center; 
+    z-index: 1000;
+}
+.form-page #login-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -18,7 +30,20 @@ a#open-create-account {
 #login-modal.open {
     display: flex;
 }
-.login-info-form {
+.home-page .login-info-form {
+    background-color: #fefefe;
+    color: #333;
+    padding: 2rem;
+    max-width: 500px;
+    width: 65%;
+    position: relative;
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 1px solid #888;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.form-page .login-info-form {
     background-color: #fefefe;
     color: #333;
     padding: 2rem;
@@ -42,6 +67,16 @@ form {
     padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid var(--primary-color);
+    cursor: pointer;
+}
+button {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+form input {
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    margin-bottom: 1rem;
 }
 
 /* X close button */
@@ -73,7 +108,8 @@ form {
 #register-modal.open {
     display: flex;
 }
-.registration-form {
+/* style for home-page */
+.home-page .registration-form {
     background-color: #fefefe;
     color: #333;
     padding: 2rem;
@@ -83,10 +119,28 @@ form {
     margin: 15% auto; 
     border: 1px solid #888;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+/* style for form-page */
+.form-page .registration-form {
+    background-color: #fefefe;
+    color: #333;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    margin: 15% auto; 
+    border: 1px solid #888;
+    border-radius: 8px;
 }
 .registration-form button {
     display: block;
     margin: 1.5rem auto 0 auto;
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 /* X close button */
@@ -122,7 +176,4 @@ input.error {
 }
 .status-message.error {
     color: red;
-}
-label {
-    margin-top: 1.3rem;
 }

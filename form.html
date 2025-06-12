@@ -10,7 +10,7 @@
     <script type="module" src="./js/main.js" defer></script>
     <title>Resume Form</title>
 </head>
-<body>
+<body class="form-page">
     <header>
         <h1>Resume Form</h1>
         <nav>
@@ -223,7 +223,7 @@
                 <label for="login-password">Password:</label>
                 <input type="password" id="login-password" name="login-password">
 
-                <button type="submit">Login</button>
+                <button type="submit" id="login-button">Login</button>
                 <p id="login-message" class="status-message"></p>
             </form>
         </section>
@@ -258,7 +258,7 @@
                     <input type="password" id="re-ent-pwd" name="re-ent-pwd" required/>
                     <span class="error-message" id="re-password-error"></span>
 
-                    <button type="submit">Create Account</button>
+                    <button type="submit" id="create-account-button">Create Account</button>
                     <p id="reg-message" class="status-message"></p>
                 </form>
             </section>
