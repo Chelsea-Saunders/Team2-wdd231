@@ -1,2 +1,4 @@
 .DS_Store
 apikey.js
+# Local Netlify folder
+.netlify
