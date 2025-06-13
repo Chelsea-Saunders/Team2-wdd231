@@ -1,3 +1,4 @@
+/* INDEX.CSS */
 @import "./partials/variables.css";
 main {
     font-family: var(--body-font);
@@ -91,9 +92,24 @@ h1 {
 }
 
 .resume-card {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
     cursor: pointer;
 }
 
+.name {
+    font-size: 25px;
+    margin-top: 0px;
+}
+
+.job {
+    font-style: italic;
+}
+
+.location {
+    font-weight: 200;
+}
 
 @media (max-width: 768px) {
 

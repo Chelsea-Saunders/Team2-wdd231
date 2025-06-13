@@ -1,3 +1,4 @@
+// INDEX.JS
 const quoteTextElement = document.querySelector(".quote-text");
 import { API_KEY } from "../apikey.js";
 console.log(API_KEY);
@@ -41,24 +42,33 @@ export function setupHamburgerMenu() {
 }
 
 // MAIN PAGE MODAL FOR RESUMES
-document.querySelector("#resume1").addEventListener("click", () => {
+export function resumeModal() {
+
+  console.log(document.querySelector("#resume1")); // Should log the element or null
+  document.querySelector("#resume1").addEventListener("click", () => {
+  console.log("Clicked resume1!");
   document.getElementById("modal1").classList.add("show");
-});
+  });
 
-document.querySelector("#resume2").addEventListener("click", () => {
-  document.getElementById("modal2").classList.add("show");
-});
+  document.querySelector("#resume1").addEventListener("click", () => {
+    document.getElementById("modal1").classList.add("show");
+  });
 
-document.querySelector("#resume3").addEventListener("click", () => {
-  document.getElementById("modal3").classList.add("show");
-});
+  document.querySelector("#resume2").addEventListener("click", () => {
+    document.getElementById("modal2").classList.add("show");
+  });
 
-document.querySelectorAll(".modal").forEach(modal => {
-  modal.addEventListener("click", e => {
-    if (!e.target.closest(".modal-content")) {
-      modal.classList.remove("show");
-    }
+  document.querySelector("#resume3").addEventListener("click", () => {
+    document.getElementById("modal3").classList.add("show");
+  });
+
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", e => {
+      if (!e.target.closest(".modal-content")) {
+        modal.classList.remove("show");
+      }
+    })
   })
-})
+}
 
 fetchQuote();

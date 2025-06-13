@@ -1,5 +1,6 @@
+/* MAIN.CSS */
 @import "./partials/variables.css";
 @import "./partials/global.css";
 @import "./partials/header.css";
 @import "./partials/footer.css";
-@import "./partials/modal.css";
+@import "./partials/login-modal.css";
