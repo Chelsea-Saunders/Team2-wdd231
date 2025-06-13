@@ -1,6 +1,5 @@
-// INDEX.JS
 const quoteTextElement = document.querySelector(".quote-text");
-import { API_KEY } from "../apikey.js";
+import { API_KEY } from "./apikey.js";
 console.log(API_KEY);
 console.log("quoteTextElement", quoteTextElement);
 
@@ -34,6 +33,7 @@ export function setupHamburgerMenu() {
   const hamburger = document.querySelector(`.hamburger`);
   const navLinks = document.querySelector(`nav ul`);
 
+  console.log("settingup hamburger menu");
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
@@ -42,33 +42,37 @@ export function setupHamburgerMenu() {
 }
 
 // MAIN PAGE MODAL FOR RESUMES
-export function resumeModal() {
+export function setupResumeModals() {
+  const resume1 = document.querySelector("#resume1");
+  if (resume1) {
+    resume1.addEventListener("click", () => {
+      document.getElementById("modal1").classList.add("show");
+    });
+  }
 
-  console.log(document.querySelector("#resume1")); // Should log the element or null
-  document.querySelector("#resume1").addEventListener("click", () => {
-  console.log("Clicked resume1!");
-  document.getElementById("modal1").classList.add("show");
-  });
+  const resume2 = document.querySelector("#resume2");
+  if (resume2) {
+    resume2.addEventListener("click", () => {
+      document.getElementById("modal2").classList.add("show");
+    });
+  }
 
-  document.querySelector("#resume1").addEventListener("click", () => {
-    document.getElementById("modal1").classList.add("show");
-  });
-
-  document.querySelector("#resume2").addEventListener("click", () => {
-    document.getElementById("modal2").classList.add("show");
-  });
-
-  document.querySelector("#resume3").addEventListener("click", () => {
-    document.getElementById("modal3").classList.add("show");
-  });
+  const resume3 = document.querySelector("#resume3");
+  if (resume3) {
+    resume3.addEventListener("click", () => {
+      document.getElementById("modal3").classList.add("show");
+    });
+  }
 
   document.querySelectorAll(".modal").forEach(modal => {
     modal.addEventListener("click", e => {
       if (!e.target.closest(".modal-content")) {
         modal.classList.remove("show");
       }
-    })
-  })
+    });
+  });
 }
 
-fetchQuote();
+if (quoteTextElement) {
+  fetchQuote();
+}

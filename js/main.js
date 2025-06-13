@@ -1,9 +1,10 @@
 // MAIN.JS
-import { setupHamburgerMenu } from "./index.js";
-import { initModal, createNewAccount } from "./login-modal.js";
-import { resumeModal } from "./index.js";
+import { setupHamburgerMenu, setupResumeModals } from "./index.js";
+import { initModal, createNewAccount } from "./login-modal.js"
+
+console.log("main.js is running");
 
 setupHamburgerMenu();
+setupResumeModals();
 initModal();
 createNewAccount();
-resumeModal();

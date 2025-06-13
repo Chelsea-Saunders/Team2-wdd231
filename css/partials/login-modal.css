@@ -27,15 +27,18 @@ a#open-create-account {
     align-items: center; 
     z-index: 1000;
 }
-#login-modal.open {
+.home-page #login-modal.open {
+    display: flex;
+}
+.form-page #login-modal.open {
     display: flex;
 }
 .home-page .login-info-form {
     background-color: #fefefe;
     color: #333;
     padding: 2rem;
-    max-width: 500px;
-    width: 65%;
+    max-width: 300px;
+    width: 90%;
     position: relative;
     margin: 15% auto; /* 15% from the top and centered */
     border: 1px solid #888;
@@ -93,7 +96,19 @@ form input {
 }
 
 /* Registration/create account Modal */
-#register-modal {
+.home-page #register-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    justify-content: center;
+    align-items: center; 
+    z-index: 1000;
+}
+.form-page #register-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -105,7 +120,10 @@ form input {
     align-items: center; 
     z-index: 1000;
 }
-#register-modal.open {
+.home-page #register-modal.open {
+    display: flex;
+}
+.form-page #register-modal.open {
     display: flex;
 }
 /* style for home-page */

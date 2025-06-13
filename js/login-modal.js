@@ -1,13 +1,13 @@
 
 // hasging function
-    async function hashPassword(password) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-        return Array.from(new Uint8Array(hashBuffer))
-            .map(b => b.toString(16).padStart(2, "0"))
-            .join("");
-    }
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, "0"))
+        .join("");
+}
     
 export function initModal() {
     const modalBox = document.querySelector("#login-modal");
@@ -194,14 +194,14 @@ export function createNewAccount() {
         document.querySelector("#login-modal").classList.remove("hidden");
     }
 
-    function openRegistrationForm() {
-        // hide login modal when opening registration form
-        document.querySelector("#login-modal").classList.add("hidden");
+    // function openRegistrationForm() {
+    //     // hide login modal when opening registration form
+    //     document.querySelector("#login-modal").classList.add("hidden");
 
-        createAccountModal.classList.remove("hidden");
-        createAccountModal.classList.add("open");
-        createAccountModal.setAttribute("aria-hidden", "false");
-    }
+    //     createAccountModal.classList.remove("hidden");
+    //     createAccountModal.classList.add("open");
+    //     createAccountModal.setAttribute("aria-hidden", "false");
+    // }
 
     // add event listerner to submit button
     openAcctBtn.addEventListener("click", (event) => {
