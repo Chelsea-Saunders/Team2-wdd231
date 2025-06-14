@@ -76,3 +76,26 @@ export function setupResumeModals() {
 if (quoteTextElement) {
   fetchQuote();
 }
+
+// Skills Section
+const skills = [
+  "JavaScript",
+  "SQL",
+  "React",
+  "Figma",
+  "User Research",
+  "HTML/CSS",
+  "Power BI",
+  "Python"
+];
+
+const skillSelect = document.getElementById("skill-options");
+
+skills.forEach(skill => {
+  const option = document.createElement("option");
+  option.value = skill.toLowerCase()
+  option.textContent = skill;
+  skillSelect.appendChild(option);
+});
+
+// Need to add the part where it changes depending if they have that skill or not below. 

@@ -1,5 +1,6 @@
 /* INDEX.CSS */
 @import "./partials/variables.css";
+
 main {
     font-family: var(--body-font);
 }
@@ -111,7 +112,16 @@ h1 {
     font-weight: 200;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1350px) {
+    .resume-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+}
+
+@media (max-width: 850px) {
 
 
     .resume-list {
