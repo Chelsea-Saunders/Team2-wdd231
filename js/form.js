@@ -1,6 +1,6 @@
 // console.log("form.js loaded");
 
-import { setupHamburgerMenu } from "./index.js";
+// import { setupHamburgerMenu } from "./index.js";
 
 // const form = document.querySelector("#multiStepForm"); // this is the form element
 const phoneInput = document.querySelector("#phone"); // this is the phone input field
@@ -354,4 +354,4 @@ backButton.forEach(btn => {
 });
 showStep(currentStep); // show the first step initially
 
-setupHamburgerMenu();
+// setupHamburgerMenu();
