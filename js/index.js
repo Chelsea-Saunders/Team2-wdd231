@@ -89,13 +89,16 @@ const skills = [
   "Python"
 ];
 
-const skillSelect = document.getElementById("skill-options");
+// Skill dropdown
+export function setupSkillDropdown() {
+  const skillSelect = document.getElementById("skill-options");
 
-skills.forEach(skill => {
-  const option = document.createElement("option");
-  option.value = skill.toLowerCase()
-  option.textContent = skill;
-  skillSelect.appendChild(option);
-});
+  skills.forEach(skill => {
+    const option = document.createElement("option");
+    option.value = skill.toLowerCase()
+    option.textContent = skill;
+    skillSelect.appendChild(option);
+  });
+}
 
 // Need to add the part where it changes depending if they have that skill or not below. 
