@@ -182,6 +182,10 @@ input.error {
     color: red;
     font-size: 0.9em;
     margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    display: none;
+}
+.error-message.show {
     display: block;
 }
 .status-message {

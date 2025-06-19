@@ -1,8 +1,4 @@
-// console.log("form.js loaded");
 
-// import { setupHamburgerMenu } from "./index.js";
-
-// const form = document.querySelector("#multiStepForm"); // this is the form element
 const phoneInput = document.querySelector("#phone"); // this is the phone input field
 const steps = document.querySelectorAll(".step"); // this will target all the step elements in the form
 const backButton = document.querySelectorAll(".back-button"); // this is the previous button element
@@ -65,19 +61,6 @@ document.querySelector("#add-reference").addEventListener("click", function() {
     ];
 
     // call teh function with the specific container and fields
-    newFormEntry(insideForm, fields);
-});
-
-// Profile form event listener
-document.querySelector("#add-profile").addEventListener("click", function() {
-    // find the specific container related to the clicked button
-    const insideForm = this.closest(".inside-form");
-
-    // fields to add for new entry
-    const fields = [
-        { label: "Personal Profile:", type: "text", name: "profile", placeholder: "Type a little about you" }
-    ];
-    // call the function with the specific container and fields
     newFormEntry(insideForm, fields);
 });
 
@@ -233,15 +216,6 @@ function formatPhoneNumber(event) {
     // set the formatted value back to the input
     event.target.value = formatted;
 }
-
-// event listener for phone input to only allow numbers
-// document.addEventListener("DOMContentLoaded", () => {
-//     const phoneInput = document.querySelector("#phone");
-
-//     if (phoneInput) {
-//         phoneInput.addEventListener("input", formatPhoneNumber);
-//     }
-// });
 phoneInput.addEventListener("input", formatPhoneNumber);
 
 // this function will show and hide steps in the form and fade in...more smooth and less dramatic
@@ -353,5 +327,3 @@ backButton.forEach(btn => {
     });
 });
 showStep(currentStep); // show the first step initially
-
-// setupHamburgerMenu();

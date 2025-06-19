@@ -31,11 +31,12 @@ async function fetchQuote() {
 
 export function setupHamburgerMenu() {
   const hamburger = document.querySelector(`.hamburger`);
-  const navLinks = document.querySelector(`nav ul`);
+  const navLinks = document.querySelector(`nav > ul`);
 
   console.log("settingup hamburger menu");
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
+      console.log("Toggling class to:", navLinks.classList.value);
       navLinks.classList.toggle('active');
     });
   }
@@ -76,7 +77,6 @@ export function setupResumeModals() {
 if (quoteTextElement) {
   fetchQuote();
 }
-
 // Skills Section
 const skills = [
   "JavaScript",
@@ -93,6 +93,11 @@ const skills = [
 export function setupSkillDropdown() {
   const skillSelect = document.getElementById("skill-options");
 
+  if (!skillSelect) {
+    // make it ok if the dropdown is not on each page
+    return;
+  }
+
   skills.forEach(skill => {
     const option = document.createElement("option");
     option.value = skill.toLowerCase()
@@ -100,5 +105,3 @@ export function setupSkillDropdown() {
     skillSelect.appendChild(option);
   });
 }
-
-// Need to add the part where it changes depending if they have that skill or not below. 

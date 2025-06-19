@@ -11,6 +11,13 @@ async function hashPassword(password) {
     
 export function initModal() {
     const modalBox = document.querySelector("#login-modal");
+
+    const focusableElements = modalBox.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length -1];
+
     const loginForm = modalBox.querySelector("form");
     const closeModalButton = document.querySelector(".close-button");
     const openModalButton = document.querySelector("#main-login");
@@ -21,6 +28,9 @@ export function initModal() {
         modalBox.classList.remove("hidden");
         modalBox.classList.add("open");
         modalBox.setAttribute("aria-hidden", "false");
+
+        // set focus after opening modal
+        document.querySelector("#login-email").focus();
     }
     // function to remove the open class from modal
     function closeModal() {
@@ -29,6 +39,23 @@ export function initModal() {
         modalBox.classList.add("hidden");
         modalBox.setAttribute("aria-hidden", "true");
     }
+
+    //  add keydown event listener to trap the "tab" key
+    modalBox.addEventListener("keydown", function (e) {
+        if (e.key === "Tab") {
+            if (e.shiftKey) { // shift + tab
+                if (document.activeElement === firstFocusable) {
+                    e.preventDefault();
+                    lastFocusable.focus(); // focus on last element
+                }
+            } else { // tab
+                if (document.activeElement === lastFocusable) {
+                    e.preventDefault();
+                    firstFocusable.focus(); // focus on first element
+                }
+            }
+        }
+    });
 
     // add event listener to the login button
     openModalButton.addEventListener("click", (event) => {
@@ -193,15 +220,6 @@ export function createNewAccount() {
         // show modal again
         document.querySelector("#login-modal").classList.remove("hidden");
     }
-
-    // function openRegistrationForm() {
-    //     // hide login modal when opening registration form
-    //     document.querySelector("#login-modal").classList.add("hidden");
-
-    //     createAccountModal.classList.remove("hidden");
-    //     createAccountModal.classList.add("open");
-    //     createAccountModal.setAttribute("aria-hidden", "false");
-    // }
 
     // add event listerner to submit button
     openAcctBtn.addEventListener("click", (event) => {

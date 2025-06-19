@@ -24,7 +24,11 @@ h1 {
     font-size: 1.7em;
     width: 80%;
     margin: 0 auto;
-    padding: 20px 0;
+}
+h2 {
+    padding: 0 10px;
+    margin-top: 5px;
+     
 }
 legend {
     font-family: var(--body-font);
@@ -32,6 +36,11 @@ legend {
     font-weight: 400;
 }
 fieldset {
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    box-sizing: border-box;
+    margin: 1.2rem auto;
     width: 80%;
     margin: 0 auto;
     background-color: var(--fieldset-background);;
@@ -39,6 +48,8 @@ fieldset {
     border: solid .5px var(--fieldset-border);
     box-shadow: 0 0 10px var(--box-shadow);
     position: relative;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
 }
 .visually-hidden {
     position: absolute;
@@ -51,7 +62,7 @@ fieldset {
     white-space: nowrap;
     border: 0;
 }
-.inside-form {
+.contact-info-form {
     margin-bottom: 1rem;
 }
 label {
@@ -97,9 +108,24 @@ input.error {
     padding: 0.25rem;
     font-size: 0.9em;
 }
-.field-set {
-    margin-bottom: 2rem;
+
+/* remember me on this device */
+.remember-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    font-size: 0.7em;
 }
+#remember-me {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 0.7em;
+}
+
 .error-message {
     color: red;
     font-size: 0.8em;
@@ -107,6 +133,7 @@ input.error {
     margin-bottom: 10px;
     position: absolute;
 }
+
 #languages {
     margin-bottom: 25px;
     padding: 5px;
@@ -121,6 +148,26 @@ input.error {
 #add-language {
     margin-top: 20px;
 }
+#profile {
+    width: 98%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    min-height: 100px;
+    resize: vertical;
+    overflow: auto;
+    box-sizing: border-box;
+    border: 1px solid var(--fieldset-border);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    font-family: var(--body-font);
+}
+#profile-p {
+    font-size: 1em;
+}
 .inside-form select {
     width: 100%; 
     padding: 5px;
@@ -132,6 +179,7 @@ input.error {
 .bottom-buttons {
     display: flex;
     flex-direction: column;
+    gap: 15px;
     width: 50%;
     margin: 0 auto;
 }
@@ -145,8 +193,50 @@ button {
     box-shadow: 0 0 10px var(--box-shadow);
 }
 button:hover {
-    background-color: var(--primary-color);
+    background-color: var(--highligh-color);
     color: white;
+}
+.clear-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    margin: 0 auto;
+}
+.clear-page {
+    margin-top: 2rem;
+    background-color: #718371;
+    color: white;
+}
+.reset-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+#clear-button {
+    background-color: #805f5f;
+    color: white;
+}
+.progress-indicator {
+    font-size: 0.5em;
+    font-family: var(--body-font);
+    padding-left: 20px;
+    color: var(--secondary-color);
+    margin: 0;
+}
+/* this is for reference email paragraph */
+#ref-p {
+    font-size: 0.5em;
+    font-family: var(--body-font);
+    margin: 0 0 30px 0;
+    color: #008000;
+}
+#reference-email {
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 /* this will hide or show the next/back step  */
 .step {
@@ -181,6 +271,18 @@ button:hover {
 
 @media (min-width: 700px) {
     .bottom-buttons {
-        width: 30%;
+        width: 35%;
+    }
+    .clear-section {
+        width: 35%;
+    }
+    .reset-form {
+        width: 35%;
+    }
+    #profile-p {
+        margin-left: 10px;
+    }
+    #profile-header {
+        margin-left: 10px;
     }
 }
