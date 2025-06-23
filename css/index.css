@@ -42,6 +42,11 @@ select {
     width: 400px;
     height: 250px;
     background-color: var(--fieldset-background);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.resume-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
 }
 
 .motivation-section {

@@ -185,7 +185,9 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
     saveFormData(); // save data to this point
 
     // show data is saved
-    alert("Resume Submitted! Thank You!");
+    const formMessage = document.querySelector(".form-message");
+    formMessage.textContent = "Your form has been submitted successfully!";
+    formMessage.classList.remove("hidden");
 
     // clear local storage
     localStorage.removeItem("formData");

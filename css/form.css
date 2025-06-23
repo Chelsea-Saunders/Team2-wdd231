@@ -220,6 +220,18 @@ button:hover {
     background-color: #805f5f;
     color: white;
 }
+/* message when form is submitted */
+.form-message {
+    background-color: var(--fieldset-background);
+    color: var(--highligh-color);
+    border: 1px solid var(--highligh-color);
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    border-radius: 8px;
+}
+.hidden {
+    display: none;
+}
 .progress-indicator {
     font-size: 0.5em;
     font-family: var(--body-font);
