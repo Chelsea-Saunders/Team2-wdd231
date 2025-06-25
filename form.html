@@ -291,7 +291,18 @@
                             <input type="email" id="reg-email" name="reg-email" required/>
                             <span class="error-message" id="email-error"></span>
 
-                            <label for="reg-password">Password:</label>
+                            <!-- div for password requirements -->
+                            <div class="password-requirements">
+                                <p>Password must contain:</p>
+                                <ul>
+                                    <li id="length" class="invalid">At least 8 characters</li>
+                                    <li id="uppercase" class="invalid">At least 1 uppercse letter</li>
+                                    <li id="lowercase" class="invalid">At least 1 lowercase letter</li>
+                                    <li id="number" class="invalid">At least 1 number</li>
+                                    <li id="symbol" class="invlid">At least 1 special character (!@#$%^&*)</li>
+                                </ul>
+                            </div>
+                            <label for="reg-password">Create Password:</label>
                             <input type="password" id="reg-password" name="reg-password" required/>
                             <span class="error-message" id="password-error"></span>
 

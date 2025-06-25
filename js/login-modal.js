@@ -271,3 +271,25 @@ export function createNewAccount() {
         });
     }
 }  
+
+// live validation for correct password 
+const regPasswordInput = document.querySelector("#reg-password");
+if (regPasswordInput) {
+    regPasswordInput.addEventListener("input", function () {
+        const password = this.value;
+
+        // regex rules
+    const hasLength = password.length >= 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSymbol = /[!@#$%^&*()_\-+={}[\]:;"'<>,.?\\|/~]/.test(password);
+    
+    // toggle classes
+    document.querySelector("#length").className = hasLength ? "valid" : "invalid";
+    document.querySelector("#uppercase").className = hasUpperCase ? "valid" : "invalid";
+    document.querySelector("#lowercase").className = hasLowerCase ? "valid" : "invalid";
+    document.querySelector("#number").className = hasNumber ? "valid" : "invalid";
+    document.querySelector("#symbol").className = hasSymbol ? "valid" : "invalid";
+    });
+}

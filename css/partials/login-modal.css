@@ -195,3 +195,31 @@ input.error {
 .status-message.error {
     color: red;
 }
+
+/* password requirements */
+.password-requirements {
+    font-size: 0.6em;
+    list-style: none;
+    padding-left: 0;
+    color: red;
+}
+.password-requirements li.invalid {
+    color: red;
+}
+.password-requirements li.valid {
+    color: green !important;
+}
+.close-button:hover,
+#open-create-account:hover,
+#login-email:hover,
+#login-password:hover,
+#login-button:hover,
+#remember-me:hover,
+#x-button.x-button:hover,
+#reg-name:hover,
+#reg-email:hover,
+#reg-password:hover,
+#reg-confirm-password:hover,
+#create-account-button:hover {
+    cursor: pointer !important;
+}
