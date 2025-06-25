@@ -3,6 +3,11 @@ const phoneInput = document.querySelector("#phone"); // this is the phone input 
 const steps = document.querySelectorAll(".step"); // this will target all the step elements in the form
 const backButton = document.querySelectorAll(".back-button"); // this is the previous button element
 
+// automatically save anytime any input is changed
+document.addEventListener("input", () => {
+    saveFormData();
+});
+
 
 let currentStep = 0; // this will keep track of which step the user is on in the form
 
@@ -14,12 +19,15 @@ document.querySelector("#add-work-experience").addEventListener("click", functio
 
     // fields to add for new entry
     const fields = [
-        { label: "Place of Previous Employment:", type: "text", name: "past-employment", placeholder: "Company Name" }, 
-        { label: "Date of Employment:", type: "text", name: "dates", placeholder: "MM/DD/YYY" },
-        { label: "Job Duties:", type: "text", name: "duties", placeholder: "List Duties Performed" }
+        { type: "paragraph", text: "Adding New Employment Section" },
+        { label: "Place of Previous Employment:", type: "text", name: "past-employment", placeholder: "Company Name", required: true}, 
+        { label: "Start Date of Employment:", type: "text", name: "dates", placeholder: "MM/DD/YYY", required: true},
+        { label: "End Date of Employment:", type: "text", name: "dates", placeholder: "MM/DD/YYY", required: true },
+        { label: "Job Duties:", type: "text", name: "duties", placeholder: "List Duties Performed", required: true }
     ];
     // call the function with the specific container and fields
-    newFormEntry(insideForm, fields);
+    newFormEntry(insideForm, fields, "work-entry");
+    saveFormData(); // save data to local storage
 });
 // Education Experience Form Event LIstener
 document.querySelector("#add-education").addEventListener("click", function() {
@@ -28,12 +36,15 @@ document.querySelector("#add-education").addEventListener("click", function() {
 
     // fields to add for new entry
     const fields = [
-        { label: "School Name", type: "text", name: "college", placeholder: "School Name" },
-        { label: "ed-dates", type: "text", name: "ed-dates", placeholder: "MM/DD/YYYY" }, 
-        { label: "education", type: "text", name: "education", placeholder: "Degree of Certification" }
+        { type: "paragraph", text: "Adding New Education Section" },
+        { label: "Name of Institution", type: "text", name: "college", placeholder: "School Name", required: true },
+        { label: "Start Date of Educatoin", type: "text", name: "ed-dates", placeholder: "MM/DD/YYYY", required: true }, 
+        { label: "End Date of Education", type: "text", name: "end-ed-dates", placeholder: "MM/DD/YYYY", required: true },
+        { label: "Degree or Certification", type: "text", name: "education", placeholder: "Degree of Certification", required: true }
     ];
     // call the function with the specific container and fields
-    newFormEntry(insideForm, fields);
+    newFormEntry(insideForm, fields, "education-entry");
+    saveFormData(); // save data to local storage
 });
 
 // Skills form event listener
@@ -42,10 +53,12 @@ document.querySelector("#add-skills").addEventListener("click", function() {
     const insideForm = this.closest(".inside-form");
     // fields to add for new entry
     const fields = [
-        { label: "Enter Your Skills:", type: "text", name: "skills", placeholder: "Enter Skill" }
+        { type: "paragraph", text: "Adding New Skill Section" },
+        { label: "Skill:", type: "text", name: "skills", placeholder: "e.g., JavaScript, Project Manager", required: true }
     ];
     // call the function with the specific container and fields
-    newFormEntry(insideForm, fields);
+    newFormEntry(insideForm, fields, "skill-entry");
+    saveFormData(); // save data to local storage
 });
 
 // References form event Listener
@@ -55,13 +68,15 @@ document.querySelector("#add-reference").addEventListener("click", function() {
 
     // fields to add for new entry
     const fields = [
-        { label: "Reference Name:", type: "text", name: "references", placeholder: "First and Last Name" }, 
-        { label: "Reference Phone Number:", type: "tel", name: "reference-phone", placeholder: "123-456-7890" }, 
-        { label: "Reference Email:", type: "email", name: "reference-email", placeholder: "email@email.com" }
+        { type: "paragraph", text: "Adding New Reference Section" },
+        { label: "Reference Name:", type: "text", name: "references", placeholder: "First and Last Name", required: true }, 
+        { label: "Phone Number:", type: "tel", name: "reference-phone", placeholder: "123-456-7890", required: true }, 
+        { label: "Email:", type: "email", name: "reference-email", placeholder: "email@email.com", required: true }
     ];
 
     // call teh function with the specific container and fields
-    newFormEntry(insideForm, fields);
+    newFormEntry(insideForm, fields, "reference-entry");
+    saveFormData();
 });
 
 // add additional language dropdown
@@ -70,7 +85,7 @@ document.querySelector("#add-language").addEventListener("click", function() {
 
     // create new label and dropdown
     const label = document.createElement("label");
-    label.textContent = "Languages Spoken:";
+    label.textContent = "Add a Language:";
 
     const select = document.createElement("select");
     select.name = "languages";
@@ -78,7 +93,7 @@ document.querySelector("#add-language").addEventListener("click", function() {
 
     // add language options
     select.innerHTML = `
-        <option value="">--Please Choose a Language--</option>
+        <option value="">Please Choose a Language</option>
         <option value="arabic">Arabic</option>
         <option value="bengail">Bengail</option>
         <option value="chinese">Chinese(Mandarin)</option>
@@ -107,16 +122,10 @@ document.querySelector("#add-language").addEventListener("click", function() {
         <option value="vietnamese">Vietnamese</option>
         `;
 
-        // create spacing
-        const br = document.createElement("br");
-        const br2 = document.createElement("br");
-
         // insert before buttons
         const bottomButtons = insideForm.querySelector(".bottom-buttons");
         insideForm.insertBefore(label, bottomButtons);
-        insideForm.insertBefore(br, bottomButtons);
         insideForm.insertBefore(select, bottomButtons);
-        insideForm.insertBefore(br2, bottomButtons);
 });
 
 // event listener to clear the entire form
@@ -162,10 +171,8 @@ document.querySelectorAll(".next-button").forEach(function(button) {
             }
         });
 
-        saveFormData();
-
         if (!allFilled) {
-            const firstInvalid = currentStepElement.querySelector("input.error", "select.error", "textarea.error");
+            const firstInvalid = currentStepElement.querySelector("input.error, select.error, textarea.error");
             if (firstInvalid) {
                 firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
                 firstInvalid.focus();
@@ -177,23 +184,36 @@ document.querySelectorAll(".next-button").forEach(function(button) {
         currentStep++; // move to the next step
         showStep(currentStep); // show the next step
     });
+    // return formData;
 });
 
 document.querySelector("#multiStepForm").addEventListener("submit", function(event) {
     event.preventDefault(); // stopfrom reloading page
 
-    saveFormData(); // save data to this point
+    const formData = JSON.parse(localStorage.getItem("formData")) ||{};
+    let resumes = JSON.parse(localStorage.getItem("resumes"));
+    if (!Array.isArray(resumes)) {
+        resumes = [];
+    }
 
-    // show data is saved
-    const formMessage = document.querySelector(".form-message");
-    formMessage.textContent = "Your form has been submitted successfully!";
-    formMessage.classList.remove("hidden");
-
-    // clear local storage
+    resumes.push(formData);
+    localStorage.setItem("resumes", JSON.stringify(resumes));
     localStorage.removeItem("formData");
+    this.reset(); // reset the form
 
-    // reset form
-    this.reset();
+    // show submission message
+    const messageDiv = document.querySelector(".submission-message");
+    messageDiv.textContent = "Resume submitted successfully!";
+    messageDiv.classList.add("success");
+    messageDiv.classList.remove("hidden"); // remove the hidden class so message is visible
+
+    // disable buttons while waiting
+    document.querySelectorAll("button").forEach(button => button.disabled = true);
+
+    // wait 3 seconds then redirect
+    setTimeout(function() {
+        window.location.href = "index.html"; 
+    }, 3000);
 });
 
 // function to format phone number input
@@ -234,41 +254,124 @@ function showStep(index) {
             step.style.pointerEvents = "none";
         }
     });
+    saveFormData();
 }
 
 // save user input to local storage
 function saveFormData() {
-    const formData = {}; 
-    steps.forEach((step) => {
-        const inputs = step.querySelectorAll("input, textarea, select");
-        inputs.forEach((input) => {
-            if (input.name) {
-                formData[input.name] = input.value;
-            }
+    // build resume object
+
+    // read any previously saved data
+    let formData = JSON.parse(localStorage.getItem("formData")) || {};
+
+    // CONTACT INFO
+    if (document.querySelector("#name")) {
+        formData.contactInfo = {
+            name: document.querySelector("#name").value.trim(),
+            email: document.querySelector("#email").value.trim(),
+            phone: document.querySelector("#phone").value.trim(),
+            address: document.querySelector("#address").value.trim()
+        };
+    }
+
+    //WORK EXPERIENCE (loop through multiple .work-entry divs)
+    if (document.querySelector(".work-entry")) {
+        const workExperience = [];
+        document.querySelectorAll(".work-entry").forEach(entry => {
+            workExperience.push({
+                company: entry.querySelector("input[name='past-employment']").value.trim(),
+                startDate: entry.querySelector("input[name='dates']").value.trim(),
+                endDate: entry.querySelector("input[name='end-dates']").value.trim(), 
+                jobDuties: [entry.querySelector("input[name='duties']").value.trim()]
+            });
         });
-    });
+        formData.workExperience = workExperience;
+    }
+    
+
+    //EDUCATION EXPERIENCE (loop through multiple .education-entry divs)
+    if (document.querySelector(".education-entry")) {
+        const educationExperience =[];
+        document.querySelectorAll(".education-entry").forEach(entry => {
+            educationExperience.push({
+                school: entry.querySelector("input[name='college']").value.trim(),
+                startDate: entry.querySelector("input[name='ed-dates']").value.trim(),
+                endDate: entry.querySelector("input[name='end-ed-dates']").value.trim(),
+                degree: entry.querySelector("input[name='education']").value.trim()
+            });
+        });
+        formData.educationExperience = educationExperience;
+    }
+
+    // SKILLS (loop through multiple skill inputs if multiple are added)
+    if (document.querySelector("input[name='skills']")){
+        formData.skills = Array.from(document.querySelectorAll("input[name='skills']"))
+        .map(input => input.value.trim())
+        .filter(skill => skill !== ""); // filter out empty skill inputs
+    }
+
+    // LANGUAGES ( loop through multiple inputs if multiple are added)
+    if(document.querySelector("select[name='languages']")) {
+        formData.languages = Array.from(document.querySelector("select[name='languages']").selectedOptions)
+        .map(option => option.value.trim())
+        .filter(language => language !== ""); // filter out empty language inputs
+    }
+
+    // REFERENCES ( loop through multiple .reference-entry divs)
+    if (document.querySelector(".reference-entry")) {
+        const references = [];
+        document.querySelectorAll(".reference-entry").forEach(entry => {
+            references.push({
+                name: entry.querySelector("input[name='references']").value.trim(),
+                phone: entry.querySelector("input[name='reference-phone']").value.trim(),
+                email: entry.querySelector("input[name='reference-email']").value.trim()
+            });
+        });
+        formData.references = references;
+    }
+
+    // PROFILE
+    if (document.querySelector("#profile")) {
+        formData.profile = document.querySelector("#profile").value.trim();
+    }
+
+    // // GET ITEMS FROM LOCAL STORAGE
     localStorage.setItem("formData", JSON.stringify(formData));
 }
-// function for normal form entries
-function newFormEntry(container, field) {
+
+// function to add new form when the add button is clicked
+function newFormEntry(container, field, sectionClass = "") {
     const newEntry = document.createElement("div");
     newEntry.classList.add("form-entry"); // add a class for styling
+    if (sectionClass) {
+        newEntry.classList.add(sectionClass); // add section-specific class if provided
+    }
 
     field.forEach(function(field) {
-        const group = document.createElement("div");
-        group.classList.add("form-group");
+        if (field.type === "paragraph") {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = field.text;
+            newEntry.appendChild(paragraph);
+        } else {
+            const group = document.createElement("div");
+            group.classList.add("form-group");
 
-        const label = document.createElement("label");
-        label.textContent = field.label;
+            const label = document.createElement("label");
+            label.textContent = field.label;
 
-        const input = document.createElement("input");
-        input.type = field.type;
-        input.name = field.name;
-        input.placeholder = field.placeholder;
+            const input = document.createElement("input");
+            input.type = field.type;
+            input.name = field.name;
+            input.placeholder = field.placeholder;
 
-        group.appendChild(label);
-        group.appendChild(input);
-        newEntry.appendChild(group);
+            if (field.required) {
+                input.required = true; // make the input required if specified
+            }
+
+            group.appendChild(label);
+            group.appendChild(input);
+            newEntry.appendChild(group);
+            }
     });
 
     //append the new entry before the bottom buttons

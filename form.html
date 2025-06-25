@@ -65,13 +65,16 @@
 
                             <div class="inside-form">
                                 <label for="past-employment">Place of Previous Employment:</label>
-                                <input type="text" id="past-employment" name="past-employment" placeholder="Company Name">
+                                <input type="text" id="past-employment" name="past-employment" placeholder="Company Name" required>
                                 
-                                <label for="dates">Date of Employment:</label>
-                                <input type="date" id="dates" name="dates" placeholder="MM/DD/YYY">
+                                <label for="dates">Start Date of Employment:</label>
+                                <input type="date" id="dates" name="dates" placeholder="MM/DD/YYY" required>
+
+                                <label for="dates">End Date of Employment:</label>
+                                <input type="date" id="end-dates" name="dates" placeholder="MM/DD/YYY" required>
                                 
                                 <label for="duties">Job Duties:</label>
-                                <input type="text" id="duties" name="duties" placeholder="List duties performed">
+                                <input type="text" id="duties" name="duties" placeholder="List duties performed" required>
 
                                 <div class="bottom-buttons">
                                     <button type="button" class="add-entry" id="add-work-experience">Add Work Experience</button>
@@ -94,8 +97,11 @@
                                 <label for="college">Name of Institution</label>
                                 <input type="text" id="college" name="college" placeholder="School Name">
 
-                                <label for="ed-dates">Dates of Education:</label>
+                                <label for="ed-dates">Start Date of Education:</label>
                                 <input type="date" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY">
+
+                                <label for="end-ed-dates">End Date of Education:</label>
+                                <input type="date" id="end-ed-dates" name="end-ed-dates" placeholder="MM/DD/YYY">
                                 
                                 <label for="education">Degree or Certification:</label>
                                 <input type="text" id="education" name="education" placeholder="Degree or Certification">
@@ -217,6 +223,7 @@
                                 <label for="profile" id="profile-p">Write a Paragraph About Yourself:</label>
                                 <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience."></textarea>
 
+                                <div class="submission-message hidden" id="submission-message"></div>
                                 <div class="bottom-buttons">
                                     <div id="form-message" class="form-message hidden"></div>
                                     <button type="button" class="back-button">Back</button>

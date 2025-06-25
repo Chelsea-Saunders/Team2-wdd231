@@ -11,12 +11,13 @@ async function hashPassword(password) {
     
 export function initModal() {
     const modalBox = document.querySelector("#login-modal");
+    if (!modalBox) {
+        console.warn("No login-modal found, skipping modal setup.");
+        return;
+    }
 
-    const focusableElements = modalBox.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select'
-    );
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length -1];
+    let firstFocusable;
+    let lastFocusable; 
 
     const loginForm = modalBox.querySelector("form");
     const closeModalButton = document.querySelector(".close-button");
@@ -29,6 +30,13 @@ export function initModal() {
         modalBox.classList.add("open");
         modalBox.setAttribute("aria-hidden", "false");
 
+        const focusableElements = modalBox.querySelectorAll(
+            'a[href], button:not([disabled]), textarea, input, select'
+        );
+
+        firstFocusable = focusableElements[0];
+        lastFocusable = focusableElements[focusableElements.length -1];
+
         // set focus after opening modal
         document.querySelector("#login-email").focus();
     }
@@ -39,6 +47,15 @@ export function initModal() {
         modalBox.classList.add("hidden");
         modalBox.setAttribute("aria-hidden", "true");
     }
+
+    openModalButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        openModal();
+    });
+
+    closeModalButton.addEventListener("click", () => {
+        closeModal();
+    });
 
     //  add keydown event listener to trap the "tab" key
     modalBox.addEventListener("keydown", function (e) {
@@ -55,23 +72,11 @@ export function initModal() {
                 }
             }
         }
-    });
-
-    // add event listener to the login button
-    openModalButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        openModal();
-    });
-
-    // add event listener to close button
-    closeModalButton.addEventListener("click", closeModal);
-
-    // add event listener to window for keyboard/keydown event
-    window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
+        if (e.key === "Escape") {
             closeModal();
         }
     });
+
     window.addEventListener("click", (event) => {
         if (event.target===modalBox) {
             closeModal();
@@ -112,6 +117,10 @@ export function initModal() {
 
 export function createNewAccount() {
     const registerForm = document.querySelector(".registration-form form");
+    if (!registerForm) {
+        console.warn("No register form found: skipping createNewAccount setup.");
+        return;
+    }
     const createAccountModal = document.querySelector("#register-modal");
     const openAcctBtn = document.querySelector("#open-create-account");
     const closeAcctBtn = document.querySelector(".x-button");
@@ -220,6 +229,15 @@ export function createNewAccount() {
         // show modal again
         document.querySelector("#login-modal").classList.remove("hidden");
     }
+
+    // function openRegistrationForm() {
+    //     // hide login modal when opening registration form
+    //     document.querySelector("#login-modal").classList.add("hidden");
+
+    //     createAccountModal.classList.remove("hidden");
+    //     createAccountModal.classList.add("open");
+    //     createAccountModal.setAttribute("aria-hidden", "false");
+    // }
 
     // add event listerner to submit button
     openAcctBtn.addEventListener("click", (event) => {

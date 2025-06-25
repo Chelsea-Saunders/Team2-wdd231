@@ -74,6 +74,32 @@ export function setupResumeModals() {
   });
 }
 
+export function setupDynamicResumes() {
+  const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
+  const resumeList = document.querySelector(".resume-list");
+
+  resumes.forEach((resume, index) => {
+    const card = document.createElement("div");
+    card.classList.add("resume-card");
+
+    let workCompany = "No work experience";
+    if (Array.isArray(resume.workExperience) && resume.workExperience.length > 0) {
+      workCompany = resume.workExperience[0].company;
+    }
+
+    card.innerHTML = `
+      <p class="name">${resume.contactInfo.name}</p>
+      <p class="job">${workCompany}</p>
+      <p class="location">${resume.contactInfo.address}</p>
+    `;
+
+    card.addEventListener("click", () => {
+      window.open(`resume.html?resumeIndex=${index}`, "blank");
+    });
+    resumeList.appendChild(card);
+  });
+}
+
 if (quoteTextElement) {
   fetchQuote();
 }
