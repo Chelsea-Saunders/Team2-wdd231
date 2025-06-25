@@ -6,6 +6,17 @@ if (phoneInput) {
 const steps = document.querySelectorAll(".step"); // this will target all the step elements in the form
 const backButton = document.querySelectorAll(".back-button"); // this is the previous button element
 
+// date fields
+const today = new Date();
+// formate date: MM/DD/YYYY
+// const month = String(today.getMonth() + 1).padStart(2, "0");
+// const day = String(today.getDate()).padStart(2, "0");
+// const year = today.getFullYear();
+// const todayDate = `${month}/${day}/${year}`; // format: "MM/DD/YYYY"
+const todayString = today.toISOString().split("T")[0]; // this will format: "YYYY-MM-DD"
+const sixtyYearsAgo = new Date(today.getFullYear() - 60, today.getMonth(), today.getDate());
+const sixtyYearsAgoString = sixtyYearsAgo.toISOString().split("T")[0]; // this will format: "YYYY-MM-DD"
+
 // automatically save anytime any input is changed
 document.addEventListener("input", () => {
     saveFormData();
@@ -24,8 +35,27 @@ document.querySelector("#add-work-experience").addEventListener("click", functio
     const fields = [
         { type: "paragraph", text: "Adding New Employment Section" },
         { label: "Place of Previous Employment:", type: "text", name: "past-employment", placeholder: "Company Name", required: true}, 
-        { label: "Start Date of Employment:", type: "text", name: "start-dates", placeholder: "MM/DD/YYY", required: true},
-        { label: "End Date of Employment:", type: "text", name: "end-dates", placeholder: "MM/DD/YYY", required: true },
+        { 
+            label: "Start Date of Employment:", 
+            type: "date", 
+            required: true,
+            min: sixtyYearsAgoString, // set minimum date to 60 years ago
+            max: todayString, // set maximum date to today
+            // value: todayString, // set default value to today
+            name: "start-dates", 
+            placeholder: "MM/DD/YYYY"
+        },
+        { 
+            label: "End Date of Employment:", 
+            type: "date", 
+            required: true,
+            min: sixtyYearsAgoString, // set minimum date to 60 years ago
+            max: todayString, // set maximum date to today
+            // value: todayString, // set default value to today
+            name: "end-dates", 
+            placeholder: "MM/DD/YYY" 
+             
+        },
         { label: "Job Duties:", type: "text", name: "duties", placeholder: "List Duties Performed", required: true }
     ];
     // call the function with the specific container and fields
@@ -41,8 +71,26 @@ document.querySelector("#add-education").addEventListener("click", function() {
     const fields = [
         { type: "paragraph", text: "Adding New Education Section" },
         { label: "Name of Institution", type: "text", name: "college", placeholder: "School Name", required: true },
-        { label: "Start Date of Educatoin", type: "text", name: "ed-dates", placeholder: "MM/DD/YYYY", required: true }, 
-        { label: "End Date of Education", type: "text", name: "end-ed-dates", placeholder: "MM/DD/YYYY", required: true },
+        { 
+            label: "Start Date of Education", 
+            type: "date", 
+            required: true,
+            min: sixtyYearsAgoString, // set minimum date to 60 years ago
+            max: todayString, // set maximum date to today
+            // value: todayString, // set default value to today
+            name: "ed-dates", 
+            placeholder: "MM/DD/YYYY"
+        }, 
+        { 
+            label: "End Date of Education", 
+            type: "date", 
+            required: true,
+            min: sixtyYearsAgoString, // set minimum date to 60 years ago
+            max: todayString, // set maximum date to today
+            // value: todayString, // set default value to today
+            name: "end-ed-dates", 
+            placeholder: "MM/DD/YYYY" 
+        },
         { label: "Degree or Certification", type: "text", name: "education", placeholder: "Degree of Certification", required: true }
     ];
     // call the function with the specific container and fields
@@ -396,7 +444,12 @@ function newFormEntry(container, field, sectionClass = "") {
             const input = document.createElement("input");
             input.type = field.type;
             input.name = field.name;
-            input.placeholder = field.placeholder;
+            input.placeholder = field.placeholder || "";
+            input.required = field.required || false; // set required attribute if specified
+
+            if (field.min) input.min = field.min;
+            if (field.max) input.max = field.max;
+            if (field.value) input.value = field.value; // set default value if specified
 
             if (field.required) {
                 input.required = true; // make the input required if specified
