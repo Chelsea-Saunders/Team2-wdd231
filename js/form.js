@@ -1,5 +1,8 @@
 
 const phoneInput = document.querySelector("#phone"); // this is the phone input field
+if (phoneInput) {
+    phoneInput.addEventListener("input", formatPhoneNumber);
+}
 const steps = document.querySelectorAll(".step"); // this will target all the step elements in the form
 const backButton = document.querySelectorAll(".back-button"); // this is the previous button element
 
@@ -21,8 +24,8 @@ document.querySelector("#add-work-experience").addEventListener("click", functio
     const fields = [
         { type: "paragraph", text: "Adding New Employment Section" },
         { label: "Place of Previous Employment:", type: "text", name: "past-employment", placeholder: "Company Name", required: true}, 
-        { label: "Start Date of Employment:", type: "text", name: "dates", placeholder: "MM/DD/YYY", required: true},
-        { label: "End Date of Employment:", type: "text", name: "dates", placeholder: "MM/DD/YYY", required: true },
+        { label: "Start Date of Employment:", type: "text", name: "start-dates", placeholder: "MM/DD/YYY", required: true},
+        { label: "End Date of Employment:", type: "text", name: "end-dates", placeholder: "MM/DD/YYY", required: true },
         { label: "Job Duties:", type: "text", name: "duties", placeholder: "List Duties Performed", required: true }
     ];
     // call the function with the specific container and fields
@@ -76,6 +79,13 @@ document.querySelector("#add-reference").addEventListener("click", function() {
 
     // call teh function with the specific container and fields
     newFormEntry(insideForm, fields, "reference-entry");
+    insideForm.querySelectorAll("input[name='reference-phone']").forEach(input => {
+        // only attach event listeners to new inputs
+        if (!input.dataset.listenerAdded) { // prevent double-binding
+            input.addEventListener("input", formatPhoneNumber);
+        input.dataset.listenerAdded = "true"; // mark this input as now having a listener}
+        }
+    });
     saveFormData();
 });
 
@@ -140,36 +150,51 @@ document.querySelectorAll(".clear-page").forEach (button => {
 document.querySelectorAll(".next-button").forEach(function(button) {
     button.addEventListener("click", function() {
         const currentStepElement = this.closest(".step");
-        const requiredInputs = currentStepElement.querySelectorAll("input[required], select[required], textarea[required]");
+
+        const formEntries = currentStepElement.querySelectorAll(".form-entry, .inside-form");
+        let allFilled = true; // flag to check if all required fields are filled
+
+        formEntries.forEach(entry => {
+            // check if any input has a value 
+            const inputs = entry.querySelectorAll("input, textarea, select");
+            const hasAnyValue = Array.from(inputs).some(input => input.value.trim() !== "");
+
+            if (!hasAnyValue) {
+                // skip validation if form is empty
+                return;
+            }
         
-        let allFilled = true;
+            // validate required fields within this entry
+            const requiredInputs = entry.querySelectorAll("input[required], textarea[required], select[required]");
 
-        requiredInputs.forEach((requiredInput) => {
-            const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
+            requiredInputs.forEach((requiredInput) => {
+                const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
 
-            // remove any existing error message
-            let existingMessage = requiredInput.nextElementSibling;
-            if (existingMessage && existingMessage.classList.contains("error-message")) {
-                existingMessage.remove();
-            }
+                // remove any existing error message
+                let existingMessage = requiredInput.nextElementSibling;
+                if (existingMessage && existingMessage.classList.contains("error-message")) {
+                    existingMessage.remove();
+                }
 
-            if (!requiredInput.value.trim()) {
-                allFilled = false;
-                requiredInput.classList.add("error"); // add error class for styling 
+                if (!requiredInput.value.trim()) {
+                    allFilled = false;
+                    requiredInput.classList.add("error"); // add error class for styling 
 
-                // create error message
-                const message = document.createElement("div");
-                message.className = "error-message";
-                message.textContent = `Required: ${fieldName}`;
-                requiredInput.after(message);
+                    // create error message
+                    const message = document.createElement("div");
+                    message.className = "error-message";
+                    message.textContent = `Required: ${fieldName}`;
+                    requiredInput.after(message);
 
-                requestAnimationFrame(() => {
-                    message.classList.add("show");
-                });
-            } else {
-                requiredInput.classList.remove("error"); // remove error class if filled 
-            }
-        });
+                    requestAnimationFrame(() => {
+                        message.classList.add("show");
+                    });
+                } else {
+                    requiredInput.classList.remove("error"); // remove error class if filled 
+                }
+            });  
+
+        });  
 
         if (!allFilled) {
             const firstInvalid = currentStepElement.querySelector("input.error, select.error, textarea.error");
@@ -179,13 +204,14 @@ document.querySelectorAll(".next-button").forEach(function(button) {
             }
             return; // this will stop everything here if not valid.
         }
-        // all required fields are fille...go to next step
-        saveFormData(); // save data to local storage
-        currentStep++; // move to the next step
-        showStep(currentStep); // show the next step
+
+        // all required fields are filled...go to next step
+        saveFormData();
+        currentStep++;
+        showStep(currentStep);
     });
-    // return formData;
 });
+
 
 document.querySelector("#multiStepForm").addEventListener("submit", function(event) {
     event.preventDefault(); // stopfrom reloading page
@@ -217,9 +243,9 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
 });
 
 // function to format phone number input
-function formatPhoneNumber(event) {
+function formatPhoneNumberString(input) {
     //only get numbers
-    const input = event.target.value;
+    // const input = event.target.value;
     const numbers = input.replace(/\D/g, ""); // removes anything that isn't a digit
 
     // format as 123-456-7890
@@ -236,9 +262,17 @@ function formatPhoneNumber(event) {
     }
 
     // set the formatted value back to the input
-    event.target.value = formatted;
+    // event.target.value = formatted;
+    return formatted;
 }
-phoneInput.addEventListener("input", formatPhoneNumber);
+// input event handler (for live formatting)
+function formatPhoneNumber(event) {
+    event.target.value = formatPhoneNumberString(event.target.value);
+}
+//attach it ot the input field
+document.querySelectorAll("input[name='reference-phone']").forEach(input => {
+    input.addEventListener("input", formatPhoneNumber);
+});
 
 // this function will show and hide steps in the form and fade in...more smooth and less dramatic
 function showStep(index) {
@@ -280,7 +314,7 @@ function saveFormData() {
         document.querySelectorAll(".work-entry").forEach(entry => {
             workExperience.push({
                 company: entry.querySelector("input[name='past-employment']").value.trim(),
-                startDate: entry.querySelector("input[name='dates']").value.trim(),
+                startDate: entry.querySelector("input[name='start-dates']").value.trim(),
                 endDate: entry.querySelector("input[name='end-dates']").value.trim(), 
                 jobDuties: [entry.querySelector("input[name='duties']").value.trim()]
             });
@@ -323,7 +357,7 @@ function saveFormData() {
         document.querySelectorAll(".reference-entry").forEach(entry => {
             references.push({
                 name: entry.querySelector("input[name='references']").value.trim(),
-                phone: entry.querySelector("input[name='reference-phone']").value.trim(),
+                phone: formatPhoneNumberString(entry.querySelector("input[name='reference-phone']").value.trim()),
                 email: entry.querySelector("input[name='reference-email']").value.trim()
             });
         });
