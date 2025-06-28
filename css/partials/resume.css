@@ -25,3 +25,10 @@
 .skills {
     font-size: 20px;
 }
+
+.cont-info {
+    display: grid;
+    align-content: center;
+    border: solid black 2px;
+}
+

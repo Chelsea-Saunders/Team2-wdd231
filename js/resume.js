@@ -35,10 +35,10 @@ function dynamicResumeTemplate(resume) {
     let template = `
         <section class="cont-info">
             <h2>Contact Information</h2>
-            <p><strong>Name:</strong> ${resume.contactInfo.name}</p>
-            <p><strong>Email:</strong> ${resume.contactInfo.email}</p>
-            <p><strong>Phone:</strong> ${resume.contactInfo.phone}</p>
-            <p><strong>Address:</strong> ${resume.contactInfo.address}</p>
+            <p class="name"><strong>Name:</strong> ${resume.contactInfo.name}</p>
+            <p class="email"><strong>Email:</strong> ${resume.contactInfo.email}</p>
+            <p class="phone"><strong>Phone:</strong> ${resume.contactInfo.phone}</p>
+            <p class="address"><strong>Address:</strong> ${resume.contactInfo.address}</p>
         </section>
     `;
     // TEMPLATE FOR WORK EXPERIENCE
