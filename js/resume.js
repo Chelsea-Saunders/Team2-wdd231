@@ -7,7 +7,7 @@ export function loadResume() {
     if (indexParam === null) {
         document.querySelector("#new-resume").innerHTML = "<p>Resume not found (missing index).</p>";
         console.error("Resume index missing from URL.");
-        return 
+        return;
     }
 
     const index = parseInt(indexParam);
@@ -15,7 +15,7 @@ export function loadResume() {
     console.log("Resume Index:", index);
     console.log("Resumes Array:", resumes);
 
-    // only check if resumes array langth here (not the resume itself)
+    // only check if resumes array length here (not the resume itself)
     if (!resumes.length || index === null || index >= resumes.length) {
         document.querySelector("#new-resume").innerHTML = "<p>Resume not found</p>"
         console.error("Resume not found for index:", index);
@@ -26,7 +26,6 @@ export function loadResume() {
     const resume = resumes[index]; 
     document.querySelector("#new-resume").innerHTML = dynamicResumeTemplate(resume);
 }
-// loadResume();
 
 // build template
 function dynamicResumeTemplate(resume) {

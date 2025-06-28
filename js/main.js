@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setupDynamicResumes();
     }
 
-    if (window.location.pathname.includes("resume.html")) {
+    if (window.location.pathname.includes("resume")) {
         loadResume();
     }
 });

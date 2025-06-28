@@ -94,7 +94,7 @@ export function setupDynamicResumes() {
     `;
 
     card.addEventListener("click", () => {
-      window.open(`resume.html?resumeIndex=${index}`, "blank");
+      window.open(`resume.html?resumeIndex=${index}`, "_blank");
     });
     resumeList.appendChild(card);
   });
