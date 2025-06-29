@@ -131,3 +131,20 @@ export function setupSkillDropdown() {
     skillSelect.appendChild(option);
   });
 }
+
+export function setupSkillFilter() {
+  const skillSelect = document.getElementById("skill-options");
+
+  if (!skillSelect) return;
+
+  skillSelect.addEventListener("change", (event) => {
+    const selectedSkill = event.target.value.toLowerCase();
+
+    document.querySelectorAll(".resume-card").forEach(card => {
+      const skills = card.dataset.skills?.split(",") || [];
+
+      const showCard = selectedSkill === "" || skills.includes(selectedSkill);
+      card.style.display = showCard ? "block" : "none";
+    });
+  });
+}

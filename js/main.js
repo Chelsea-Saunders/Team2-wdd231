@@ -1,4 +1,4 @@
-import { setupHamburgerMenu, setupResumeModals, setupSkillDropdown, setupDynamicResumes } from "./index.js";
+import { setupHamburgerMenu, setupResumeModals, setupSkillDropdown, setupDynamicResumes, setupSkillFilter } from "./index.js";
 import { initModal, createNewAccount } from "./login-modal.js";
 import { loadResume } from "./resume.js";
 
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initModal();
     createNewAccount();
     setupSkillDropdown();
+    setupSkillFilter();
 
     // making sure the function is needed in the html file:
     if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
