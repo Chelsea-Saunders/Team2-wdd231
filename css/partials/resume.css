@@ -8,8 +8,8 @@
     padding: 10px;
 }
 
-h2 {
-    margin-left: 20%;
+.work-experience h2, .skills h2 {
+    margin-left: 10%;
     font-size: 1.5em;
 }
 
