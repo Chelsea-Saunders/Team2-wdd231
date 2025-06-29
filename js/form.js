@@ -18,9 +18,9 @@ const sixtyYearsAgo = new Date(today.getFullYear() - 60, today.getMonth(), today
 const sixtyYearsAgoString = sixtyYearsAgo.toISOString().split("T")[0]; // this will format: "YYYY-MM-DD"
 
 // automatically save anytime any input is changed
-document.addEventListener("input", () => {
-    saveFormData();
-});
+// document.addEventListener("input", () => {
+//     saveFormData();
+// });
 
 
 let currentStep = 0; // this will keep track of which step the user is on in the form
@@ -264,6 +264,8 @@ document.querySelectorAll(".next-button").forEach(function(button) {
 document.querySelector("#multiStepForm").addEventListener("submit", function(event) {
     event.preventDefault(); // stopfrom reloading page
 
+    saveFormData();
+
     const formData = JSON.parse(localStorage.getItem("formData")) ||{};
     let resumes = JSON.parse(localStorage.getItem("resumes"));
     if (!Array.isArray(resumes)) {
@@ -357,33 +359,71 @@ function saveFormData() {
     }
 
     //WORK EXPERIENCE (loop through multiple .work-entry divs)
-    if (document.querySelector(".work-entry")) {
-        const workExperience = [];
-        document.querySelectorAll(".work-entry").forEach(entry => {
+    const workExperience = [];
+    document.querySelectorAll(".work-entry, .step2 .inside-form").forEach(entry => {
+        const company = entry.querySelector("input[name='past-employment']");
+        const start = entry.querySelector("input[name='start-dates']");
+        const end = entry.querySelector("input[name='end-dates']");
+        const duties = entry.querySelector("input[name='duties']");
+
+        if (company && start && end && duties) {
             workExperience.push({
-                company: entry.querySelector("input[name='past-employment']").value.trim(),
-                startDate: entry.querySelector("input[name='start-dates']").value.trim(),
-                endDate: entry.querySelector("input[name='end-dates']").value.trim(), 
-                jobDuties: [entry.querySelector("input[name='duties']").value.trim()]
+                company: company.value.trim(),
+                startDate: start.value.trim(),
+                endDate: end.value.trim(),
+                jobDuties: [duties.value.trim()]
             });
-        });
+        }
+    });
+    if (workExperience.length) {
         formData.workExperience = workExperience;
     }
+    // if (document.querySelector(".work-entry")) {
+    //     const workExperience = [];
+    //     document.querySelectorAll(".work-entry").forEach(entry => {
+    //         workExperience.push({
+    //             company: entry.querySelector("input[name='past-employment']").value.trim(),
+    //             startDate: entry.querySelector("input[name='start-dates']").value.trim(),
+    //             endDate: entry.querySelector("input[name='end-dates']").value.trim(), 
+    //             jobDuties: [entry.querySelector("input[name='duties']").value.trim()]
+    //         });
+    //     });
+    //     formData.workExperience = workExperience;
+    // }
     
 
     //EDUCATION EXPERIENCE (loop through multiple .education-entry divs)
-    if (document.querySelector(".education-entry")) {
-        const educationExperience =[];
-        document.querySelectorAll(".education-entry").forEach(entry => {
+    const educationExperience = [];
+    document.querySelectorAll(".education-entry, .step3 .inside-form").forEach(entry => {
+        const school = entry.querySelector("input[name='college']");
+        const start = entry.querySelector("input[name='ed-dates']");
+        const end = entry.querySelector("input[name='end-ed-dates']");
+        const degree = entry.querySelector("input[name='education']");
+
+        if (school && start && end && degree) {
             educationExperience.push({
-                school: entry.querySelector("input[name='college']").value.trim(),
-                startDate: entry.querySelector("input[name='ed-dates']").value.trim(),
-                endDate: entry.querySelector("input[name='end-ed-dates']").value.trim(),
-                degree: entry.querySelector("input[name='education']").value.trim()
+                school: school.value.trim(),
+                startDate: start.value.trim(),
+                endDate: end.value.trim(),
+                degree: degree.value.trim()
             });
-        });
+        }
+    });
+    if (educationExperience.length) {
         formData.educationExperience = educationExperience;
     }
+    // if (document.querySelector(".education-entry")) {
+    //     const educationExperience =[];
+    //     document.querySelectorAll(".education-entry").forEach(entry => {
+    //         educationExperience.push({
+    //             school: entry.querySelector("input[name='college']").value.trim(),
+    //             startDate: entry.querySelector("input[name='ed-dates']").value.trim(),
+    //             endDate: entry.querySelector("input[name='end-ed-dates']").value.trim(),
+    //             degree: entry.querySelector("input[name='education']").value.trim()
+    //         });
+    //     });
+    //     formData.educationExperience = educationExperience;
+    // }
 
     // SKILLS (loop through multiple skill inputs if multiple are added)
     if (document.querySelector("input[name='skills']")){
@@ -393,24 +433,50 @@ function saveFormData() {
     }
 
     // LANGUAGES ( loop through multiple inputs if multiple are added)
-    if(document.querySelector("select[name='languages']")) {
-        formData.languages = Array.from(document.querySelector("select[name='languages']").selectedOptions)
-        .map(option => option.value.trim())
-        .filter(language => language !== ""); // filter out empty language inputs
+    const allLanguages = document.querySelectorAll("select[name='languages']");
+    const languages = [];
+
+    allLanguages.forEach(select => {
+        Array.from(select.selectedOptions).forEach(option => {
+            const value = option.value.trim();
+            if (value && !languages.includes(value)) {
+                languages.push(value);
+            }
+        });
+    });
+    if (languages.length) {
+        formData.languages = languages;
     }
 
     // REFERENCES ( loop through multiple .reference-entry divs)
-    if (document.querySelector(".reference-entry")) {
-        const references = [];
-        document.querySelectorAll(".reference-entry").forEach(entry => {
+    const references = [];
+    document.querySelectorAll(".reference-entry, .step6 .inside-form").forEach(entry => {
+        const name = entry.querySelector("input[name='references']");
+        const phone = entry.querySelector("input[name='reference-phone']");
+        const email = entry.querySelector("input[name='reference-email']");
+
+        if (name && phone && email) {
             references.push({
-                name: entry.querySelector("input[name='references']").value.trim(),
-                phone: formatPhoneNumberString(entry.querySelector("input[name='reference-phone']").value.trim()),
-                email: entry.querySelector("input[name='reference-email']").value.trim()
+                name: name.value.trim(),
+                phone: formatPhoneNumberString(phone.value.trim()),
+                email: email.value.trim()
             });
-        });
+        }  
+    });
+    if (references.length) {
         formData.references = references;
     }
+    // if (document.querySelector(".reference-entry")) {
+    //     const references = [];
+    //     document.querySelectorAll(".reference-entry").forEach(entry => {
+    //         references.push({
+    //             name: entry.querySelector("input[name='references']").value.trim(),
+    //             phone: formatPhoneNumberString(entry.querySelector("input[name='reference-phone']").value.trim()),
+    //             email: entry.querySelector("input[name='reference-email']").value.trim()
+    //         });
+    //     });
+    //     formData.references = references;
+    // }
 
     // PROFILE
     if (document.querySelector("#profile")) {
