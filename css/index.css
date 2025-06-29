@@ -89,7 +89,7 @@ h1 {
     padding: 30px;
     margin: 0 auto;
     width: 70%;
-    height: 90%;
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -140,7 +140,8 @@ h1 {
         padding: 30px;
         margin: 0 auto;
         width: 90%;
-        height: 90%;
+        height: 100%;
         border-radius: 10px;
+        font-size: 90%;
     }
 }
