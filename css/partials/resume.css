@@ -1,31 +1,3 @@
-.name {
-    font-size: 30px;
-}
-
-.address {
-    font-size: 20px;
-}
-
-.email {
-    font-size: 20px;
-}
-
-.phone {
-    font-size: 20px;
-}
-
-.language {
-    font-size: 20px;
-}
-
-.profile {
-    font-size: 20px;
-}
-
-.skills {
-    font-size: 20px;
-}
-
 .cont-info {
     display: grid;
     align-content: center;
