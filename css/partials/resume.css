@@ -4,20 +4,33 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    padding: 5px;
+    padding: 0px;
+}
+
+.header {
+    margin-left: 10%;
+}
+
+.cont-info p, .work-entry p, .education p, .languages p, .references p, .profile p {
+    margin-top: 0px;
+    margin-bottom: 1px;
 }
 
 .work-experience h2, .skills h2 {
-    margin-left: 10%;
+    margin-left: 40%;
     font-size: 1.5em;
 }
 
 .skills li {
-    margin-left: 20%
+    margin-left: 50%
 }
 
 body {
     background-color:  rgb(237, 246, 224);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: solid black 2px;
 }
 
 footer {
