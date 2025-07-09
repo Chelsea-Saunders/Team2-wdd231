@@ -75,7 +75,7 @@ label {
     font-family: var(--body-font);
     font-size: .8em;
     font-weight: 400;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     display: block;
     position: relative;
 }
@@ -102,10 +102,11 @@ input.error {
     margin-bottom: 2rem;
 }
 .form-group {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
 }
 .form-group label {
     font-weight: bold;
@@ -113,6 +114,8 @@ input.error {
 .form-group input {
     padding: 0.25rem;
     font-size: 0.9em;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* remember me on this device */
@@ -139,6 +142,10 @@ input.error {
     margin-bottom: 10px;
     position: absolute;
 }
+/* .error-message.show {
+    display: block;
+
+} */
 
 #languages {
     margin-bottom: 25px;
@@ -238,6 +245,7 @@ button:hover {
     text-align: center;
     margin: 40px auto;;
     font-size: 1.2em;
+    animation: pulse 2s ease-in-out;
 }
 .hidden {
     display: none;
@@ -286,6 +294,7 @@ button:hover {
     height: auto;
     overflow: visible;
 }
+
 .skip-link {
     position: absolute;
     left: -9999px;
@@ -311,7 +320,6 @@ button:hover {
     z-index: 1000;
     outline: 2px solid #fff;
 }
-
 
 @media (min-width: 700px) {
     .bottom-buttons {

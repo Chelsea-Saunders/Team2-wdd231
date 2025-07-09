@@ -130,3 +130,22 @@ function dynamicResumeTemplate(resume) {
     `;
     return template;
 }
+export function addPrintButton() {
+    const header = document.querySelector(".resume-header .header-row");
+
+    if (!document.getElementById("print-resume")) {
+
+        if (header) {
+            const printButton = document.createElement("button");
+            printButton.id = "print-resume";
+            printButton.classList.add("print-button");
+            printButton.title = "Print Resume";
+            printButton.innerHTML = "🖨️ Print";
+
+            printButton.addEventListener("click", () => {
+                window.print();
+            });
+            header.appendChild(printButton);
+        }
+    }
+}

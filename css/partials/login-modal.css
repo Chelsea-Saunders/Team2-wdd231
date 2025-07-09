@@ -209,6 +209,9 @@ input.error {
 .password-requirements li.valid {
     color: green !important;
 }
+.password-requirements li {
+    transition: color 0.3s ease;
+}
 .close-button:hover,
 #open-create-account:hover,
 #login-email:hover,
@@ -222,4 +225,9 @@ input.error {
 #reg-confirm-password:hover,
 #create-account-button:hover {
     cursor: pointer !important;
+}
+
+.status-message.success {
+    color: green;
+    animation: pulse 1s ease-in-out;
 }

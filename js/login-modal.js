@@ -16,8 +16,8 @@ export function initModal() {
         return;
     }
 
-    let firstFocusable;
-    let lastFocusable; 
+    // let firstFocusable;
+    // let lastFocusable; 
 
     const loginForm = modalBox.querySelector("form");
     const closeModalButton = document.querySelector(".close-button");
@@ -57,31 +57,39 @@ export function initModal() {
         closeModal();
     });
 
-    //  add keydown event listener to trap the "tab" key
-    modalBox.addEventListener("keydown", function (e) {
-        if (e.key === "Tab") {
-            if (e.shiftKey) { // shift + tab
-                if (document.activeElement === firstFocusable) {
-                    e.preventDefault();
-                    lastFocusable.focus(); // focus on last element
-                }
-            } else { // tab
-                if (document.activeElement === lastFocusable) {
-                    e.preventDefault();
-                    firstFocusable.focus(); // focus on first element
-                }
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            if (modalBox.classList.contains("open")) {
+                closeModal();
             }
-        }
-        if (e.key === "Escape") {
-            closeModal();
         }
     });
 
-    window.addEventListener("click", (event) => {
-        if (event.target===modalBox) {
-            closeModal();
-        }
-    });
+    //  add keydown event listener to trap the "tab" key
+    // modalBox.addEventListener("keydown", function (e) {
+    //     if (e.key === "Tab") {
+    //         if (e.shiftKey) { // shift + tab
+    //             if (document.activeElement === firstFocusable) {
+    //                 e.preventDefault();
+    //                 lastFocusable.focus(); // focus on last element
+    //             }
+    //         } else { // tab
+    //             if (document.activeElement === lastFocusable) {
+    //                 e.preventDefault();
+    //                 firstFocusable.focus(); // focus on first element
+    //             }
+    //         }
+    //     }
+    //     if (e.key === "Escape") {
+    //         closeModal();
+    //     }
+    // });
+
+    // window.addEventListener("click", (event) => {
+    //     if (event.target===modalBox) {
+    //         closeModal();
+    //     }
+    // });
 
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault(); 
@@ -106,7 +114,7 @@ export function initModal() {
                 loginForm.reset();
                 loginMessage.textContent = "";
                 loginMessage.classList.remove("success");
-            }, 2000);
+            }, 1000);
         } else {
                 loginMessage.textContent = "There is no account associated with that email or password.";
                 loginMessage.classList.remove("success");
@@ -202,7 +210,7 @@ export function createNewAccount() {
         setTimeout(() => {
             acctCreatedMsg.textContent = "";
             acctCreatedMsg.classList.remove("success");
-        }, 3000);
+        }, 1000);
         
         // show confirmation and reset
         registerForm.reset();
@@ -230,15 +238,6 @@ export function createNewAccount() {
         document.querySelector("#login-modal").classList.remove("hidden");
     }
 
-    // function openRegistrationForm() {
-    //     // hide login modal when opening registration form
-    //     document.querySelector("#login-modal").classList.add("hidden");
-
-    //     createAccountModal.classList.remove("hidden");
-    //     createAccountModal.classList.add("open");
-    //     createAccountModal.setAttribute("aria-hidden", "false");
-    // }
-
     // add event listerner to submit button
     openAcctBtn.addEventListener("click", (event) => {
         event.preventDefault();
@@ -255,11 +254,11 @@ export function createNewAccount() {
             }
         }
     });
-    window.addEventListener("click", (event) => {
-        if (event.target === createAccountModal) {
-            closeRegistrationForm();
-        }
-    });
+    // window.addEventListener("click", (event) => {
+    //     if (event.target === createAccountModal) {
+    //         closeRegistrationForm();
+    //     }
+    // });
 
     // clear errors
     function clearErrors() {

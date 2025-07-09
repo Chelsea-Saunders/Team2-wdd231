@@ -95,16 +95,16 @@
                             <div class="inside-form">
 
                                 <label for="college">Name of Institution</label>
-                                <input type="text" id="college" name="college" placeholder="School Name">
+                                <input type="text" id="college" name="college" placeholder="School Name" required>
 
                                 <label for="ed-dates">Start Date of Education:</label>
-                                <input type="date" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY">
+                                <input type="date" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY" required>
 
                                 <label for="end-ed-dates">End Date of Education:</label>
-                                <input type="date" id="end-ed-dates" name="end-ed-dates" placeholder="MM/DD/YYY">
+                                <input type="date" id="end-ed-dates" name="end-ed-dates" placeholder="MM/DD/YYY" required>
                                 
                                 <label for="education">Degree or Certification:</label>
-                                <input type="text" id="education" name="education" placeholder="Degree or Certification">
+                                <input type="text" id="education" name="education" placeholder="Degree or Certification"required>
 
                                 <div class="bottom-buttons">
                                     <button type="button" class="add-entry" id="add-education">Add Education Experience</button>
@@ -125,7 +125,7 @@
 
                             <div class="inside-form">
                                 <label for="skills">Skills:</label>
-                                <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Project Manager">
+                                <input type="text" id="skills" name="skills" placeholder="e.g., JavaScript, Project Manager" required>
 
                                 <div class="bottom-buttons">
                                     <button type="button" class="add-entry" id="add-skills">Add Skill</button>
@@ -192,14 +192,14 @@
 
                             <div class="inside-form">
                                 <label for="references">Reference Name:</label>
-                                <input type="text" id="references" name="references" placeholder="First and Last Name">
+                                <input type="text" id="references" name="references" placeholder="First and Last Name" required>
                                 
                                 <label for="reference-phone">Phone Number</label>
-                                <input type="tel" id="reference-phone" name="reference-phone" placeholder="123-456-7890">
+                                <input type="tel" id="reference-phone" name="reference-phone" placeholder="123-456-7890"required>
                                 <span id="reference-phone-format" class="hint-text"></span>
 
                                 <label for="reference-email">Email</label>
-                                <input type="email" id="reference-email" name="reference-email" placeholder="email@email.com">
+                                <input type="email" id="reference-email" name="reference-email" placeholder="email@email.com" required>
                                 <p id="ref-p">We'll only use this to varify references if needed.</p>
 
                                 <div class="bottom-buttons">
@@ -221,7 +221,7 @@
 
                             <div class="inside-form">
                                 <label for="profile" id="profile-p">Write a Paragraph About Yourself:</label>
-                                <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience."></textarea>
+                                <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience." required></textarea>
 
                                 <div class="submission-message hidden" id="submission-message"></div>
                                 <div class="bottom-buttons">
@@ -296,10 +296,10 @@
                                 <p>Password must contain:</p>
                                 <ul>
                                     <li id="length" class="invalid">At least 8 characters</li>
-                                    <li id="uppercase" class="invalid">At least 1 uppercse letter</li>
+                                    <li id="uppercase" class="invalid">At least 1 uppercase letter</li>
                                     <li id="lowercase" class="invalid">At least 1 lowercase letter</li>
                                     <li id="number" class="invalid">At least 1 number</li>
-                                    <li id="symbol" class="invlid">At least 1 special character (!@#$%^&*)</li>
+                                    <li id="symbol" class="invalid">At least 1 special character (!@#$%^&*)</li>
                                 </ul>
                             </div>
                             <label for="reg-password">Create Password:</label>
