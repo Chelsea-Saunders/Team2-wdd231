@@ -44,6 +44,7 @@ select {
     background-color: var(--fieldset-background);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .resume-card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(0,0,0,0.4);
@@ -85,6 +86,7 @@ h1 {
 }
 
 .modal-content {
+    position: relative;
     background-color: var(--fieldset-background);
     padding: 30px;
     margin: 0 auto;
@@ -95,6 +97,16 @@ h1 {
 
 .modal.show { 
     display: flex;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
 }
 
 .resume-card {

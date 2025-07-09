@@ -1,28 +1,40 @@
-const quoteTextElement = document.querySelector(".quote-text");
 import { API_KEY } from "./apikey.js";
 console.log(API_KEY);
-console.log("quoteTextElement", quoteTextElement);
+// Skills Section
+const skills = [
+  "JavaScript",
+  "SQL",
+  "React",
+  "Figma",
+  "User Research",
+  "HTML/CSS",
+  "Power BI",
+  "Python"
+];
 
-async function fetchQuote() {
-    try 
-    {
-        const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
-        method: "GET",
-        headers: {
-        "X-Api-Key": API_KEY
-    }
-});  
+export async function fetchQuote() {
+  const quoteTextElement = document.querySelector(".quote-text");
+  if (!quoteTextElement) return;
+  try 
+  {
+      const response = await fetch("https://api.api-ninjas.com/v1/quotes", {
+      method: "GET",
+      headers: {
+      "X-Api-Key": API_KEY
+  }
+  });  
 
-    if (!response.ok) 
-    {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+  if (!response.ok) 
+  {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-    const data = await response.json();
-    const quote = data[0];
+  const data = await response.json();
+  const quote = data[0];
 
-    quoteTextElement.textContent = `"${quote.quote}" — ${quote.author}`;
-  } catch (error) {
+  quoteTextElement.textContent = `"${quote.quote}" — ${quote.author}`;
+  } 
+  catch (error) {
     quoteTextElement.textContent = "Failed to load quote.";
     console.error("Quote fetch failed:", error);
   }
@@ -32,7 +44,6 @@ async function fetchQuote() {
 export function setupHamburgerMenu() {
   const hamburger = document.querySelector(`.hamburger`);
   const navLinks = document.querySelector(`nav > ul`);
-
   console.log("settingup hamburger menu");
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
@@ -72,6 +83,15 @@ export function setupResumeModals() {
       }
     });
   });
+
+  document.querySelectorAll(".close-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const modal = button.closest(".modal");
+      if (modal) {
+        modal.classList.remove("show");
+      }
+    })
+  })
 }
 
 export function setupDynamicResumes() {
@@ -99,21 +119,6 @@ export function setupDynamicResumes() {
     resumeList.appendChild(card);
   });
 }
-
-if (quoteTextElement) {
-  fetchQuote();
-}
-// Skills Section
-const skills = [
-  "JavaScript",
-  "SQL",
-  "React",
-  "Figma",
-  "User Research",
-  "HTML/CSS",
-  "Power BI",
-  "Python"
-];
 
 // Skill dropdown
 export function setupSkillDropdown() {
