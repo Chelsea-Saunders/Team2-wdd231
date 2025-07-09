@@ -208,7 +208,7 @@ document.querySelectorAll(".next-button").forEach(function(button) {
 
                 if (!value) {
                     allFilled = false;
-                    requiredInput.classList.add("error");
+                    requiredInput.classList.add("error-placeholder");
                     if (!requiredInput.dataset.originalPlaceholder) {
                         requiredInput.dataset.originalPlaceholder = requiredInput.placeholder;
                     }
@@ -220,25 +220,31 @@ document.querySelectorAll(".next-button").forEach(function(button) {
                     const inputDate = new Date(value);
                     if (inputDate < sixtyYearsAgo || inputDate > today) {
                         allFilled = false;
-                        requiredInput.classList.add("error");
 
-                        const errorMessage = document.createElement("div");
-                        errorMessage.className = "error-message";
-                        errorMessage.textContent = `${fieldName} must be between ${sixtyYearsAgoString} and ${todayString}.`;
-                        requiredInput.after(errorMessage);
+                        requiredInput.dataset.originalValue = requiredInput.value;
+                        requiredInput.value = "";
+                        requiredInput.placeholder = `${fieldName} must be between ${sixtyYearsAgoString} and ${todayString}.`;
+                        requiredInput.classList.add("error-placeholder");
                         return;
                     }
                 }
 
-                // if input is valid
-                requiredInput.classList.remove("error");
+                requiredInput.classList.remove("error-placeholder");
                 if (requiredInput.dataset.originalPlaceholder) {
                     requiredInput.placeholder = requiredInput.dataset.originalPlaceholder;
                 }
+                // if input is valid
+                requiredInput.addEventListener("focus", () => {
+                    if (requiredInput.dataset.originalValue != undefined) {
+                        requiredInput.value = requiredInput.dataset.originalValue;
+                        delete requiredInput.dataset.originalValue;
+                        requiredInput.classList.remove("error-placeholder");
+                    }
+                });
             });
 
         if (!allFilled) {
-            const firstInvalid = currentStepElement.querySelector("input.error, select.error, textarea.error");
+            const firstInvalid = currentStepElement.querySelector("input.error-placeholder, select.error-placeholder, textarea.error-placeholder");
             if (firstInvalid) {
                 firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
                 firstInvalid.focus();
@@ -257,18 +263,40 @@ document.querySelectorAll(".next-button").forEach(function(button) {
 document.querySelector("#multiStepForm").addEventListener("submit", function(event) {
     event.preventDefault(); // stopfrom reloading page
 
+    // save final form data to  "formData" key
     saveFormData();
 
+    // get saved formData from local storage
     const formData = JSON.parse(localStorage.getItem("formData")) ||{};
+    
+    // add to the "resumes" array
     let resumes = JSON.parse(localStorage.getItem("resumes"));
     if (!Array.isArray(resumes)) {
         resumes = [];
     }
-
     resumes.push(formData);
     localStorage.setItem("resumes", JSON.stringify(resumes));
+
+    // clear draft verson
     localStorage.removeItem("formData");
-    this.reset(); // reset the form
+
+    // // confirmation message
+    // const messageDiv = document.querySelector(".submission-message");
+    // messageDiv.textContent = "Resume submitted successfully!";
+    // messageDiv.classList.add("success");
+    // messageDiv.classList.remove("hidden");
+
+    // resumes.push(formData);
+    // localStorage.setItem("resumes", JSON.stringify(resumes));
+    // localStorage.removeItem("formData");
+
+    // // store the index for redirect
+    // const resumeIndex = resumes.length - 1;
+
+    // // redirect to resume.html with index parameters
+    // window.open(`resume.html?index=${resumeIndex}`, '_blank'); // open in a new tab
+
+    // this.reset(); // reset the form
 
     // show submission message
     const messageDiv = document.querySelector(".submission-message");
@@ -339,7 +367,7 @@ function saveFormData() {
     // build resume object
 
     // read any previously saved data
-    let formData = JSON.parse(localStorage.getItem("formData")) || {};
+    const formData = JSON.parse(localStorage.getItem("formData")) || {};
 
     // CONTACT INFO
     if (document.querySelector("#name")) {
@@ -443,19 +471,13 @@ function saveFormData() {
     // // GET ITEMS FROM LOCAL STORAGE
     localStorage.setItem("formData", JSON.stringify(formData));
 
-    // // give each resume a timestamp-based ID
+    // give each resume a timestamp-based ID
     // formData.id = Date.now();
 
     // // save to a list of resumes
     // const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
     // resumes.push(formData);
     // localStorage.setItem("resumes", JSON.stringify(resumes));
-
-    // // store the index for redirect
-    // const resumeIndex = resumes.length - 1;
-
-    // // redirect to resume.html with index parameters
-    // window.location.href = `resume.html?resumeIndex=${resumeIndex}`;
 }
 
 
