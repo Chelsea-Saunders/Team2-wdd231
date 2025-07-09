@@ -1,4 +1,4 @@
-import { API_KEY } from "./apikey.js";
+import { API_KEY } from "./apikey.mjs";
 console.log(API_KEY);
 // Skills Section
 const skills = [

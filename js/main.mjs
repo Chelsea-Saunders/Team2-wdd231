@@ -1,6 +1,6 @@
-import { setupHamburgerMenu, setupResumeModals, setupSkillDropdown, setupDynamicResumes, setupSkillFilter, fetchQuote } from "./index.js";
-import { initModal, createNewAccount } from "./login-modal.js";
-import { loadResume, addPrintButton } from "./resume.js";
+import { setupHamburgerMenu, setupResumeModals, setupSkillDropdown, setupDynamicResumes, setupSkillFilter, fetchQuote } from "./index.mjs";
+import { initModal, createNewAccount } from "./login-modal.mjs";
+import { loadResume, addPrintButton } from "./resume.mjs";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("main.js is running");
