@@ -198,6 +198,49 @@ document.querySelectorAll(".next-button").forEach(function(button) {
 
                 // remove any existing error message
                 const existingMessage = requiredInput.nextElementSibling;
+
+                // const formEntries = currentStepElement.querySelectorAll(".form-entry, .inside-form");
+                // let allFilled = true; // flag to check if all required fields are filled
+
+                // formEntries.forEach(entry => {
+                //     // check if any input has a value 
+                //     const inputs = entry.querySelectorAll("input, textarea, select");
+                //     const hasAnyValue = Array.from(inputs).some(input => input.value.trim() !== "");
+
+                //     if (!hasAnyValue) {
+                //         // skip validation if form is empty
+                //         return;
+                //     }
+
+                //     const requiredInputs = entry.querySelectorAll("input[required], textarea[required], select[required]");
+
+                //     requiredInputs.forEach((requiredInput) => {
+                //         const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
+
+                //         let existingMessage = requiredInput.nextElementSibling;
+
+                //         if (existingMessage && existingMessage.classList.contains("error-message")) {
+                //             existingMessage.remove();
+                //         }
+
+                //         if (!requiredInput.value.trim()) {
+                //             allFilled = false;
+                //             requiredInput.classList.add("error"); // add error class for styling 
+                //             // create error message
+                //             const message = document.createElement("div");
+                //             message.className = "error-message";
+                //             message.textContent = `Required: ${fieldName}`;
+                //             requiredInput.after(message);
+
+                //              requestAnimationFrame(() => {
+                //                 message.classList.add("show");
+                //             });
+                //         } else {
+                //             requiredInput.classList.remove("error");
+                //         }
+                //     });
+                // });
+
                 if (existingMessage && existingMessage.classList.contains("error-message")) {
                     existingMessage.remove();
                 }
@@ -266,7 +309,7 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
     // wait 3 seconds then redirect
     setTimeout(function() {
         window.location.href = "index.html"; 
-    }, 3000);
+    }, 2000);
 });
 
 // function to FORMAT PHONE NUMBER input
@@ -427,20 +470,22 @@ function saveFormData() {
     // // GET ITEMS FROM LOCAL STORAGE
     localStorage.setItem("formData", JSON.stringify(formData));
 
-    // give each resume a timestamp-based ID
-    formData.id = Date.now();
+    // // give each resume a timestamp-based ID
+    // formData.id = Date.now();
 
-    // save to a list of resumes
-    const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
-    resumes.push(formData);
-    localStorage.setItem("resumes", JSON.stringify(resumes));
+    // // save to a list of resumes
+    // const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
+    // resumes.push(formData);
+    // localStorage.setItem("resumes", JSON.stringify(resumes));
 
-    // store the index for redirect
-    const resumeIndex = resumes.length - 1;
+    // // store the index for redirect
+    // const resumeIndex = resumes.length - 1;
 
-    // redirect to resume.html with index parameters
-    window.location.href = `resume.html?resumeIndex=${resumeIndex}`;
+    // // redirect to resume.html with index parameters
+    // window.location.href = `resume.html?resumeIndex=${resumeIndex}`;
 }
+
+
 
 // function to add new form when the add button is clicked
 function newFormEntry(container, field, sectionClass = "") {
@@ -524,6 +569,9 @@ function loadFormData() {
         const inputs = step.querySelectorAll("input, textarea, select");
         
         inputs.forEach((input) => {
+            // if (input.name && savedData[input.name]) {
+            //     input.value = savedData[input.name];
+            // }
             if (input.name && savedData[input.name]) {
                 if(input.name === "references" && Array.isArray(savedData.references)) {
                     input.value = savedData.references[0]?.name || "";;
