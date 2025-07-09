@@ -199,70 +199,43 @@ document.querySelectorAll(".next-button").forEach(function(button) {
                 // remove any existing error message
                 const existingMessage = requiredInput.nextElementSibling;
 
-                // const formEntries = currentStepElement.querySelectorAll(".form-entry, .inside-form");
-                // let allFilled = true; // flag to check if all required fields are filled
-
-                // formEntries.forEach(entry => {
-                //     // check if any input has a value 
-                //     const inputs = entry.querySelectorAll("input, textarea, select");
-                //     const hasAnyValue = Array.from(inputs).some(input => input.value.trim() !== "");
-
-                //     if (!hasAnyValue) {
-                //         // skip validation if form is empty
-                //         return;
-                //     }
-
-                //     const requiredInputs = entry.querySelectorAll("input[required], textarea[required], select[required]");
-
-                //     requiredInputs.forEach((requiredInput) => {
-                //         const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
-
-                //         let existingMessage = requiredInput.nextElementSibling;
-
-                //         if (existingMessage && existingMessage.classList.contains("error-message")) {
-                //             existingMessage.remove();
-                //         }
-
-                //         if (!requiredInput.value.trim()) {
-                //             allFilled = false;
-                //             requiredInput.classList.add("error"); // add error class for styling 
-                //             // create error message
-                //             const message = document.createElement("div");
-                //             message.className = "error-message";
-                //             message.textContent = `Required: ${fieldName}`;
-                //             requiredInput.after(message);
-
-                //              requestAnimationFrame(() => {
-                //                 message.classList.add("show");
-                //             });
-                //         } else {
-                //             requiredInput.classList.remove("error");
-                //         }
-                //     });
-                // });
-
                 if (existingMessage && existingMessage.classList.contains("error-message")) {
                     existingMessage.remove();
                 }
 
-                if (!requiredInput.value.trim()) {
-                    // console.warn(`Missing value in: ${fieldName}`);
+                const isDate = requiredInput.type === "date";
+                const value = requiredInput.value.trim();
+
+                if (!value) {
                     allFilled = false;
-                    requiredInput.classList.add("error"); // add error class for styling 
-
-                    if (!requiredInput.dataset.origionalPlaceholder) {
-                        requiredInput.dataset.origionalPlaceholder = requiredInput.placeholder; // store original placeholder
+                    requiredInput.classList.add("error");
+                    if (!requiredInput.dataset.originalPlaceholder) {
+                        requiredInput.dataset.originalPlaceholder = requiredInput.placeholder;
                     }
-
                     requiredInput.placeholder = `Required: ${fieldName}`;
-                } else {
-                    requiredInput.classList.remove("error");
-                
-                if (requiredInput.dataset.origionalPlaceholder) {
-                    requiredInput.placeholder = requiredInput.dataset.origionalPlaceholder;
+                    return;
                 }
-            };
-        });  
+                // check date range 
+                if (isDate) {
+                    const inputDate = new Date(value);
+                    if (inputDate < sixtyYearsAgo || inputDate > today) {
+                        allFilled = false;
+                        requiredInput.classList.add("error");
+
+                        const errorMessage = document.createElement("div");
+                        errorMessage.className = "error-message";
+                        errorMessage.textContent = `${fieldName} must be between ${sixtyYearsAgoString} and ${todayString}.`;
+                        requiredInput.after(errorMessage);
+                        return;
+                    }
+                }
+
+                // if input is valid
+                requiredInput.classList.remove("error");
+                if (requiredInput.dataset.originalPlaceholder) {
+                    requiredInput.placeholder = requiredInput.dataset.originalPlaceholder;
+                }
+            });
 
         if (!allFilled) {
             const firstInvalid = currentStepElement.querySelector("input.error, select.error, textarea.error");
