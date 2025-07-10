@@ -8,7 +8,12 @@ async function hashPassword(password) {
         .map(b => b.toString(16).padStart(2, "0")) // maps over each byte 'b':b.toString(16) converts the byte to a hexadecimal string, .padStart(2, "0") ensures each hex value has 2 characters ('a' becomes '0a')
         .join(""); // joins the array of hexadecimal strings into a long string and this will be the final SHA-256 hash in hex format.
 }
-    
+
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex to validate email format
+    return emailRegex.test(email); 
+}
+
 export function initModal() {
     const modalBox = document.querySelector("#login-modal");
     if (!modalBox) {
@@ -20,21 +25,21 @@ export function initModal() {
     let lastFocusable; 
 
     const loginForm = modalBox.querySelector("form");
-    const closeModalButton = document.querySelector(".close-button");
+    // const closeModalButton = document.querySelector(".close-button") || document.querySelector(".x-button");
     const openModalButton = document.querySelector("#main-login");
     const loginMessage = document.querySelector("#login-message");
 
     console.log("modalBox:", modalBox);
-    console.log("closeModalButton:", closeModalButton);
+    // console.log("closeModalButton:", closeModalButton);
     console.log("openModalButton:", openModalButton);
 
-    if (!modalBox || !closeModalButton || !openModalButton) {
+    if (!modalBox || !openModalButton) {
         console.warn("One or more modal elements not found.");
         return;
     }
 
     // function that will add the class open to the modal
-    function openModal() {
+    function openLoginModal() {
         modalBox.classList.remove("hidden");
         modalBox.classList.add("open");
         modalBox.setAttribute("aria-hidden", "false");
@@ -49,45 +54,90 @@ export function initModal() {
         // set focus after opening modal
         document.querySelector("#login-email").focus();
     }
-    // function to remove the open class from modal
-    function closeModal() {
-        // openModalButton.focus();
-        modalBox.classList.remove("open");
-        modalBox.classList.add("hidden");
-        modalBox.setAttribute("aria-hidden", "true");
+    // CLOSE LOGIN MODAL
+    function closeLoginModal() {
+        const loginModal = document.querySelector("#login-modal");
+        loginModal.classList.remove("open");
+        loginModal.classList.add("hidden");
+        loginModal.setAttribute("aria-hidden", "true");
     }
 
+    // CLOSE CREATE ACCOUNT MODAL
+    function closeCreateAcctModal() {
+        const regModal = document.querySelector("#register-modal");
+        regModal.classList.remove("open");
+        regModal.classList.add("hidden");
+        regModal.setAttribute("aria-hidden", "true");
+    }
+
+    // OPEN LOGIN MODAL
     openModalButton.addEventListener("click", (event) => {
         event.preventDefault();
-        openModal();
+        openLoginModal();
+    });
+    // OPEN CREATE ACCOUNT MODAL
+    document.querySelector("#open-create-account").addEventListener("click", (event) => {
+        event.preventDefault();
+        closeLoginModal(); // close login modal
+
+        const regModal = document.querySelector("#register-modal");
+        regModal.classList.remove("hidden");
+        regModal.classList.add("open");
+        regModal.setAttribute("aria-hidden", "false");
+        document.querySelector("#reg-name").focus(); // focus on name input
     });
 
-    closeModalButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        console.log("Close button clicked!");
-        closeModal();
-    });
+    //CLOSE LOGIN MODAL 
+    const loginCloseButton = document.querySelector("#login-modal .x-button");
+    if (loginCloseButton) {
+        loginCloseButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            closeLoginModal();
+        });
+
+    }
+    // CLOSE REGISTER/CREATE ACCOUNT MODAL 
+    const regCloseButton = document.querySelector("#register-modal .x-button");
+    if (regCloseButton) {
+        regCloseButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            closeCreateAcctModal();
+        });
+    }
 
     window.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
-            if (modalBox.classList.contains("open")) {
-                closeModal();
-            }
-        }
-    });
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("close-button")) {
-            console.log("Delegated: Close button clicked");
-            closeModal();
+            const loginModal = document.querySelector("#login-modal");
+            const regModal = document.querySelector("#register-modal");
+
+            if (loginModal.classList.contains("open")) closeLoginModal();
+            if (regModal.classList.contains("open")) closeCreateAcctModal();
         }
     });
 
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault(); 
-        console.log("Login form was submitted");
+        // console.log("Login form was submitted");
 
-        const email = loginForm.querySelector("#login-email").value.trim();
+        const emailInput = loginForm.querySelector("#login-email");
+        const email = emailInput.value.trim();
         const password = loginForm.querySelector("#login-password").value.trim();
+
+        emailInput.addEventListener("focus", () => {
+            emailInput.classList.remove("error-placeholder");
+            loginMessage.textContent = "";
+            loginMessage.classList.remove("error");
+        });
+
+        // validate email format
+        if (!validateEmail(email)) {
+            loginMessage.textContent = "Enter a valid email";
+            loginMessage.classList.remove("success");
+            loginMessage.classList.add("error");
+            emailInput.classList.add("error-placeholder");
+            emailInput.focus();
+            return; // stop submission if email is invalid
+        }
 
         const hashedPassword = await hashPassword(password);
 
@@ -101,11 +151,11 @@ export function initModal() {
             loginMessage.classList.add("success");
 
             setTimeout(() => {
-                closeModal();
+                closeLoginModal();
                 loginForm.reset();
                 loginMessage.textContent = "";
                 loginMessage.classList.remove("success");
-            }, 2000);
+            }, 1500);
         } else {
                 loginMessage.textContent = "There is no account associated with that email or password.";
                 loginMessage.classList.remove("success");

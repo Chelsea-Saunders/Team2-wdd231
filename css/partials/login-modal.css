@@ -232,6 +232,9 @@ input.error {
 .password-requirements li {
     transition: color 0.3s ease;
 }
+#create-account-button {
+    color: black;
+}
 .close-button:hover,
 #open-create-account:hover,
 #login-email:hover,

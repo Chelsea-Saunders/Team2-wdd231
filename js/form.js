@@ -183,6 +183,12 @@ document.querySelectorAll(".clear-page").forEach (button => {
     button.addEventListener("click", clearCurrentPage);
 });
 
+// VALIDATE EMAIL regex function
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex to validate email format
+    return emailRegex.test(email); 
+}
+
 // NEXT BUTTON event listener
 document.querySelectorAll(".next-button").forEach(function(button) {
     button.addEventListener("click", function() {
@@ -194,8 +200,6 @@ document.querySelectorAll(".next-button").forEach(function(button) {
 
             requiredInputs.forEach((requiredInput) => {
                 const fieldName = requiredInput.previousElementSibling?.textContent?.replace(":", "") || "This field";
-                // console.log(`Checking: ${fieldName}`);
-
                 // remove any existing error message
                 const existingMessage = requiredInput.nextElementSibling;
 
@@ -204,6 +208,7 @@ document.querySelectorAll(".next-button").forEach(function(button) {
                 }
 
                 const isDate = requiredInput.type === "date";
+                const emailInput = requiredInput.type === "email";
                 const value = requiredInput.value.trim();
 
                 if (!value) {
@@ -215,6 +220,19 @@ document.querySelectorAll(".next-button").forEach(function(button) {
                     requiredInput.placeholder = `Required: ${fieldName}`;
                     return;
                 }
+
+                // validate email if it exists
+                if (emailInput && !validateEmail(value)) {
+                    allFilled = false;
+                    requiredInput.classList.add("error-placeholder");
+                    if (!requiredInput.dataset.originalPlaceholder) {
+                        requiredInput.dataset.originalPlaceholder = requiredInput.placeholder;
+                    }
+                    requiredInput.value = "";
+                    requiredInput.placeholder = `Enter a valid email address.`;
+                    return
+                }
+
                 // check date range 
                 if (isDate) {
                     const inputDate = new Date(value);
@@ -268,6 +286,30 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
 
     // get saved formData from local storage
     const formData = JSON.parse(localStorage.getItem("formData")) ||{};
+    const emailInput = document.querySelectorAll("#multiStepForm input[type='email']");
+    let allValid = true;
+
+    // validate email if it exists
+    emailInput.forEach(input => {
+        const value = input.value.trim();
+        if (!validateEmail(value)) {
+            allValid = false;
+            input.classList.add("error-placeholder");
+            if (!input.dataset.originalPlaceholder) {
+                input.dataset.originalPlaceholder = input.placeholder;
+            }
+            input.value = "";
+            input.placeholder = `Enter a valid email address.`;
+        }
+    });
+    if (!allValid) {
+        const firstInvalid = document.querySelector("input.error-placeholder");
+        if (firstInvalid) {
+            firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
+            firstInvalid.focus();
+        }
+        return; // stop submission if not valid
+        }
     
     // add to the "resumes" array
     let resumes = JSON.parse(localStorage.getItem("resumes"));
@@ -279,24 +321,6 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
 
     // clear draft verson
     localStorage.removeItem("formData");
-
-    // // confirmation message
-    // const messageDiv = document.querySelector(".submission-message");
-    // messageDiv.textContent = "Resume submitted successfully!";
-    // messageDiv.classList.add("success");
-    // messageDiv.classList.remove("hidden");
-
-    // resumes.push(formData);
-    // localStorage.setItem("resumes", JSON.stringify(resumes));
-    // localStorage.removeItem("formData");
-
-    // // store the index for redirect
-    // const resumeIndex = resumes.length - 1;
-
-    // // redirect to resume.html with index parameters
-    // window.open(`resume.html?index=${resumeIndex}`, '_blank'); // open in a new tab
-
-    // this.reset(); // reset the form
 
     // show submission message
     const messageDiv = document.querySelector(".submission-message");

@@ -106,7 +106,6 @@ textarea.error-placeholder::placeholder {
     margin-bottom: 2rem;
 }
 .form-group {
-    /* margin-bottom: 1rem; */
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -200,6 +199,9 @@ textarea.error-placeholder::placeholder {
     width: 50%;
     margin: 0 auto;
 }
+.next-button {
+    margin-top: 3px;
+}
 button {
     background-color: var(--fieldset-background);
     border: solid 1px var(--primary-color);
@@ -221,7 +223,7 @@ button:hover {
     margin: 0 auto;
 }
 .clear-page {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     background-color: #718371;
     color: white;
 }
@@ -236,6 +238,9 @@ button:hover {
 #clear-button {
     background-color: #805f5f;
     color: white;
+}
+.submit-button {
+    color: black;
 }
 /* message when form is submitted */
 .submission-message {
