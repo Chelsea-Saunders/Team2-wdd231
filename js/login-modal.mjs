@@ -24,6 +24,15 @@ export function initModal() {
     const openModalButton = document.querySelector("#main-login");
     const loginMessage = document.querySelector("#login-message");
 
+    console.log("modalBox:", modalBox);
+    console.log("closeModalButton:", closeModalButton);
+    console.log("openModalButton:", openModalButton);
+
+    if (!modalBox || !closeModalButton || !openModalButton) {
+        console.warn("One or more modal elements not found.");
+        return;
+    }
+
     // function that will add the class open to the modal
     function openModal() {
         modalBox.classList.remove("hidden");
@@ -53,7 +62,9 @@ export function initModal() {
         openModal();
     });
 
-    closeModalButton.addEventListener("click", () => {
+    closeModalButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("Close button clicked!");
         closeModal();
     });
 
@@ -62,6 +73,12 @@ export function initModal() {
             if (modalBox.classList.contains("open")) {
                 closeModal();
             }
+        }
+    });
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("close-button")) {
+            console.log("Delegated: Close button clicked");
+            closeModal();
         }
     });
 
