@@ -1,12 +1,12 @@
 
 // hasging function
 async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    return Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
+    const encoder = new TextEncoder(); //converts a string in to a Uint8Array) for URF-8 encoding
+    const data = encoder.encode(password); // encodes the password string into a Uint8Array called data
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data); // uses Web Crypto API to asynchronously compute the SHA-256 hash of the data
+    return Array.from(new Uint8Array(hashBuffer)) // converts the ArrayBuffer to a Uint8Array so it can be iterated over and then wraps it with Array.from() to turn it into a regular array of bytes
+        .map(b => b.toString(16).padStart(2, "0")) // maps over each byte 'b':b.toString(16) converts the byte to a hexadecimal string, .padStart(2, "0") ensures each hex value has 2 characters ('a' becomes '0a')
+        .join(""); // joins the array of hexadecimal strings into a long string and this will be the final SHA-256 hash in hex format.
 }
     
 export function initModal() {
@@ -16,8 +16,8 @@ export function initModal() {
         return;
     }
 
-    // let firstFocusable;
-    // let lastFocusable; 
+    let firstFocusable;
+    let lastFocusable; 
 
     const loginForm = modalBox.querySelector("form");
     const closeModalButton = document.querySelector(".close-button");
@@ -65,32 +65,6 @@ export function initModal() {
         }
     });
 
-    //  add keydown event listener to trap the "tab" key
-    // modalBox.addEventListener("keydown", function (e) {
-    //     if (e.key === "Tab") {
-    //         if (e.shiftKey) { // shift + tab
-    //             if (document.activeElement === firstFocusable) {
-    //                 e.preventDefault();
-    //                 lastFocusable.focus(); // focus on last element
-    //             }
-    //         } else { // tab
-    //             if (document.activeElement === lastFocusable) {
-    //                 e.preventDefault();
-    //                 firstFocusable.focus(); // focus on first element
-    //             }
-    //         }
-    //     }
-    //     if (e.key === "Escape") {
-    //         closeModal();
-    //     }
-    // });
-
-    // window.addEventListener("click", (event) => {
-    //     if (event.target===modalBox) {
-    //         closeModal();
-    //     }
-    // });
-
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault(); 
         console.log("Login form was submitted");
@@ -114,7 +88,7 @@ export function initModal() {
                 loginForm.reset();
                 loginMessage.textContent = "";
                 loginMessage.classList.remove("success");
-            }, 1000);
+            }, 2000);
         } else {
                 loginMessage.textContent = "There is no account associated with that email or password.";
                 loginMessage.classList.remove("success");
@@ -210,13 +184,13 @@ export function createNewAccount() {
         setTimeout(() => {
             acctCreatedMsg.textContent = "";
             acctCreatedMsg.classList.remove("success");
-        }, 1000);
         
-        // show confirmation and reset
-        registerForm.reset();
-        closeRegistrationForm();
-        // if (typeof openModal === "function") openModal();
-        document.querySelector("#login-modal").classList.remove("hidden");
+            // show confirmation and reset
+            registerForm.reset();
+            closeRegistrationForm();
+            // if (typeof openModal === "function") openModal();
+            document.querySelector("#login-modal").classList.remove("hidden");
+        }, 3000);
     });
 
     // function to open registration form
@@ -254,11 +228,6 @@ export function createNewAccount() {
             }
         }
     });
-    // window.addEventListener("click", (event) => {
-    //     if (event.target === createAccountModal) {
-    //         closeRegistrationForm();
-    //     }
-    // });
 
     // clear errors
     function clearErrors() {
@@ -292,3 +261,4 @@ if (regPasswordInput) {
     document.querySelector("#symbol").className = hasSymbol ? "valid" : "invalid";
     });
 }
+initModal();

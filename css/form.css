@@ -75,7 +75,6 @@ label {
     font-family: var(--body-font);
     font-size: .8em;
     font-weight: 400;
-    /* margin-bottom: 5px; */
     display: block;
     position: relative;
 }
@@ -97,6 +96,11 @@ input:hover {
 }
 input.error {
     border: 2px solid red;
+}
+input.error-placeholder::placeholder, 
+textarea.error-placeholder::placeholder {
+    color: red !important;
+    font-style: italic;
 }
 .form-entry {
     margin-bottom: 2rem;

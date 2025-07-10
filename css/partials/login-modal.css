@@ -82,19 +82,6 @@ form input {
     margin-bottom: 1rem;
 }
 
-/* X close button */
-.close-button {
-    position: absolute;
-    top: 2%;
-    right: 5%;
-    color: #aaa;
-    font-size: 1.5rem;
-}
-.close-button:hover {
-    color: black;
-    cursor: pointer;
-}
-
 /* Registration/create account Modal */
 .home-page #register-modal {
     display: none;
@@ -160,8 +147,19 @@ form input {
     border-radius: 5px;
     padding: 5px 10px;
 }
-
-/* X close button */
+/* X close button for login account */
+.close-button {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    color: #aaa;
+    font-size: 1.5rem;
+}
+.close-button:hover {
+    color: black;
+    cursor: pointer;
+}
+/* X close button for create account */
 .x-button {
     position: absolute;
     top: 2%;
@@ -172,6 +170,26 @@ form input {
 .x-button:hover {
     color: black;
     cursor: pointer;
+}
+
+/* styling for remember me on this device label (login account) */
+label.remember-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+    font-size: 0.5rem;
+    padding-top: 1rem;
+    line-height: 0.7rem;
+    color: var(--secondary-color);
+}
+label.remember-label input[type="checkbox"] {
+    accent-color: green;
+    transform: translateY(7px);
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 /* error styles */
@@ -188,9 +206,11 @@ input.error {
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
+    transition: opacity 0.3s ease-in-out;
 }
 .status-message.success {
     color: green;
+    animation: pulse 1s ease-in-out;
 }
 .status-message.error {
     color: red;
@@ -227,7 +247,17 @@ input.error {
     cursor: pointer !important;
 }
 
-.status-message.success {
-    color: green;
-    animation: pulse 1s ease-in-out;
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
 }
