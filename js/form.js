@@ -14,6 +14,17 @@ const sixtyYearsAgoString = sixtyYearsAgo.toISOString().split("T")[0]; // this w
 
 let currentStep = 0; // this will keep track of which step the user is on in the form
 
+// function to capitalize the first letter in a word of a whole string
+function capitalizeFirstWord(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// function to capitalize the first letter of each word
+function capitalizeEachWord(string) {
+    return string.replace(/\b\w/g, character => character.toUpperCase());
+}
+
+
 // Employment History Form event listener
 document.querySelector("#add-work-experience").addEventListener("click", function() {
     console.log(document.querySelector("#add-work-experience"));
@@ -396,10 +407,10 @@ function saveFormData() {
     // CONTACT INFO
     if (document.querySelector("#name")) {
         formData.contactInfo = {
-            name: document.querySelector("#name").value.trim(),
+            name: capitalizeEachWord(document.querySelector("#name").value.trim()),
             email: document.querySelector("#email").value.trim(),
             phone: document.querySelector("#phone").value.trim(),
-            address: document.querySelector("#address").value.trim()
+            address: capitalizeEachWord(document.querySelector("#address").value.trim())
         };
     }
 
@@ -413,10 +424,10 @@ function saveFormData() {
 
         if (company && start && end && duties) {
             workExperience.push({
-                company: company.value.trim(),
+                company: capitalizeEachWord(company.value.trim()),
                 startDate: start.value.trim(),
                 endDate: end.value.trim(),
-                jobDuties: [duties.value.trim()]
+                jobDuties: [capitalizeEachWord(duties.value.trim())]
             });
         }
     });
@@ -434,10 +445,10 @@ function saveFormData() {
 
         if (school && start && end && degree) {
             educationExperience.push({
-                school: school.value.trim(),
+                school: capitalizeEachWord(school.value.trim()),
                 startDate: start.value.trim(),
                 endDate: end.value.trim(),
-                degree: degree.value.trim()
+                degree: capitalizeEachWord(degree.value.trim())
             });
         }
     });
@@ -448,7 +459,7 @@ function saveFormData() {
     // SKILLS (loop through multiple skill inputs if multiple are added)
     if (document.querySelector("input[name='skills']")){
         formData.skills = Array.from(document.querySelectorAll("input[name='skills']"))
-        .map(input => input.value.trim())
+        .map(input => capitalizeEachWord(input.value.trim()))
         .filter(skill => skill !== ""); // filter out empty skill inputs
     }
 
@@ -459,9 +470,15 @@ function saveFormData() {
     allLanguages.forEach(select => {
         Array.from(select.selectedOptions).forEach(option => {
             const value = option.value.trim();
-            if (value && !languages.includes(value)) {
-                languages.push(value);
+            if (value) {
+                const capitalizedValue = capitalizeEachWord(value);
+                if (!languages.includes(capitalizeEachWord)) {
+                    languages.push(capitalizedValue);
+                }
             }
+            // if (value && !languages.includes(value)) {
+            //     languages.push(value);
+            // }
         });
     });
     if (languages.length) {
@@ -477,7 +494,7 @@ function saveFormData() {
 
         if (name && phone && email) {
             references.push({
-                name: name.value.trim(),
+                name: capitalizeEachWord(name.value.trim()),
                 phone: formatPhoneNumberString(phone.value.trim()),
                 email: email.value.trim()
             });
@@ -489,19 +506,11 @@ function saveFormData() {
 
     // PROFILE
     if (document.querySelector("#profile")) {
-        formData.profile = document.querySelector("#profile").value.trim();
+        formData.profile = capitalizeFirstWord(document.querySelector("#profile").value.trim());
     }
 
     // // GET ITEMS FROM LOCAL STORAGE
     localStorage.setItem("formData", JSON.stringify(formData));
-
-    // give each resume a timestamp-based ID
-    // formData.id = Date.now();
-
-    // // save to a list of resumes
-    // const resumes = JSON.parse(localStorage.getItem("resumes")) || [];
-    // resumes.push(formData);
-    // localStorage.setItem("resumes", JSON.stringify(resumes));
 }
 
 

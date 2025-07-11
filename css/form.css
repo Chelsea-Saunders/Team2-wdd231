@@ -102,13 +102,19 @@ textarea.error-placeholder::placeholder {
     color: red !important;
     font-style: italic;
 }
+input.error-placeholder, 
+textarea.error-placeholder {
+    border: 2px solid red;
+    border-radius: 5px;
+    font-style: italic;
+}
 .form-entry {
     margin-bottom: 2rem;
 }
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.1rem;
     width: 100%;
 }
 .form-group label {
@@ -240,8 +246,13 @@ button:hover {
     color: white;
 }
 .submit-button {
-    color: black;
+    color: black !important;
+    background-color: var(--fieldset-background) !important;
 }
+/* .submit-button:hover {
+    background-color: var(--highligh-color);
+    color: white !important;
+} */
 /* message when form is submitted */
 .submission-message {
     background-color: var(--fieldset-background);
@@ -274,7 +285,7 @@ button:hover {
     color: #008000;
 }
 #reference-email {
-    padding-bottom: 0;
+    padding-bottom: 0.2rem;
     margin-bottom: 0;
 }
 /* this will hide or show the next/back step  */

@@ -234,6 +234,7 @@ input.error {
 }
 #create-account-button {
     color: black;
+    background-color: var(--background-color) !important;
 }
 .close-button:hover,
 #open-create-account:hover,
