@@ -209,10 +209,17 @@ export function createNewAccount() {
 
         const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/; // at least 8 characters, one letter and one number
         if (password && !passwordPattern.test(password)) {
-            document.querySelector("#password-error").textContent = 
-                "Try a stronger password.";
-            passwordInput.classList.add("error");
+            passwordInput.classList.add("error-placeholder");
+            passwordInput.value = "";
+            passwordInput.placeholder = "Try stronger password";
             hasError = true;
+
+            passwordInput.addEventListener("focus", function handler() {
+                passwordInput.placeholder = "Create Password";
+                passwordInput.classList.remove("error-placeholder");
+            
+                passwordInput.removeEventListener("focus", handler);
+            });
         }
 
         if (password !== chkPwd) {

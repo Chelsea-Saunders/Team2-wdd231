@@ -128,6 +128,11 @@ h1 {
 .location {
     font-weight: 200;
 }
+input.error-placeholder::placeholder, 
+textarea.error-placeholder::placeholder {
+    color: red !important;
+    font-style: italic;
+}
 
 @media (max-width: 1350px) {
     .resume-list {
