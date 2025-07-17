@@ -61,7 +61,19 @@ document.querySelector("#add-work-experience").addEventListener("click", functio
     // call the function with the specific container and fields
     newFormEntry(insideForm, fields, "work-entry");
     saveFormData(); // save data to local storage
+
+    // scroll to top of new form entry
+    const newEntryTop = insideForm.querySelector(".work-entry");
+    const newEntry = newEntryTop[newEntryTop.length - 1]; // get the last added entry
+    if (newEntry) {
+        newEntry.scrollIntoView({ behavior: "smooth", block: "start" });
+        const firstInput = newEntry.querySelector("input, textarea, select");
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
 });
+
 // EDUCATION EXPERIENCE Form Event LIstener
 document.querySelector("#add-education").addEventListener("click", function() {
     // find the specific container related to the clicked button
@@ -96,6 +108,17 @@ document.querySelector("#add-education").addEventListener("click", function() {
     // call the function with the specific container and fields
     newFormEntry(insideForm, fields, "education-entry");
     saveFormData(); // save data to local storage
+
+    // scroll to top of new form entry
+    const newEntryTop = insideForm.querySelector(".education-entry");
+    const newEntry = newEntryTop[newEntryTop.length - 1]; // get the last added entry
+    if (newEntry) {
+        newEntry.scrollIntoView({ behavior: "smooth", block: "start" });
+        const firstInput = newEntry.querySelector("input, textarea, select");
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
 });
 
 // SKILLS FORM event listener
@@ -110,6 +133,17 @@ document.querySelector("#add-skills").addEventListener("click", function() {
     // call the function with the specific container and fields
     newFormEntry(insideForm, fields, "skill-entry");
     saveFormData(); // save data to local storage
+
+    // scroll to top of new form entry
+    const newEntryTop = insideForm.querySelector(".skill-entry");
+    const newEntry = newEntryTop[newEntryTop.length - 1]; // get the last added entry
+    if (newEntry) {
+        newEntry.scrollIntoView({ behavior: "smooth", block: "start" });
+        const firstInput = newEntry.querySelector("input, textarea, select");
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
 });
 
 // REFERENCES form event Listener
@@ -135,6 +169,17 @@ document.querySelector("#add-reference").addEventListener("click", function() {
         }
     });
     saveFormData();
+
+    // scroll to top of new form entry
+    const newEntryTop = insideForm.querySelector(".reference-entry");
+    const newEntry = newEntryTop[newEntryTop.length - 1]; // get the last added entry
+    if (newEntry) {
+        newEntry.scrollIntoView({ behavior: "smooth", block: "start" });
+        const firstInput = newEntry.querySelector("input, textarea, select");
+        if (firstInput) {
+            firstInput.focus();
+        }
+    }
 });
 
 // ADD LANGUAGE dropdown event listener
@@ -285,6 +330,7 @@ document.querySelectorAll(".next-button").forEach(function(button) {
         saveFormData();
         currentStep++;
         showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to the top of the next step in the modal
     });
 });
 

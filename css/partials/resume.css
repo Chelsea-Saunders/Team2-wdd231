@@ -68,9 +68,23 @@
     text-align: center;
 }
 
-/* body {
-    padding: 20px;
-} */
+.reference-entry  {
+    margin-bottom: 15px;
+    padding: 0;
+    text-align: left;
+}
+.references {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+}
+.reference-entry {
+    margin-bottom: 10px;
+    width: 40%;
+    max-width: 400px;
+}
 .resume-body {
     background-color:  rgb(237, 246, 224);
     max-width: 800px;

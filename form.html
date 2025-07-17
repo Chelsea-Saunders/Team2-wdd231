@@ -17,8 +17,8 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
         <header>
             <h1>Create Your Resume</h1>
-            <nav roll="navigaion">
-                <button class="hamburger" aira-label="Toggle navigaion menu">☰</button>
+            <nav>
+                <button class="hamburger" aria-label="Toggle navigaion menu">☰</button>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="form.html">Form Page</a></li>
@@ -36,17 +36,16 @@
                             <legend class="visually-hidden">Contact Information</legend>
                             <div class="contact-info-form">
                                 <label for="name">Name:</label>
-                                <input type="text" id="name" name="name" autocomplete="name" placeholder="First and Last" required />
+                                <input type="text" id="name" name="name" autocomplete="name" placeholder="First and Last" required >
 
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" autocomplete="email" placeholder="email@email.com" required />
+                                <input type="email" id="email" name="email" autocomplete="email" placeholder="email@email.com" required >
 
                                 <label for="phone">Phone Number:</label>
-                                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="123-456-7890" 
-                                    aria-describedby="phone-format" required/>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="123-456-7890" required>
 
                                 <label for="address">Address:</label>
-                                <input type="text" id="address" name="address" autocomplete="street-address" placeholder="1234 Street Name, Town, State Zip" required />
+                                <input type="text" id="address" name="address" autocomplete="on" placeholder="1234 Street Name, Town, State Zip" required >
 
                                 <div class="bottom-buttons">
                                 <button type="button" class="next-button">Next</button>
@@ -68,11 +67,11 @@
                                 <input type="text" id="past-employment" name="past-employment" placeholder="Company Name" required>
                                 
                                 <label for="start-dates">Start Date of Employment:</label>
-                                <input type="date" id="start-dates" name="start-dates" placeholder="MM/DD/YYY" required>
+                                <input type="date" id="start-dates" name="start-dates" required>
                                 <span class="error-message" id="start-date-error"></span>
 
                                 <label for="end-dates">End Date of Employment:</label>
-                                <input type="date" id="end-dates" name="end-dates" placeholder="MM/DD/YYY" required>
+                                <input type="date" id="end-dates" name="end-dates" required>
                                 <span class="error-message" id="end-date-error"></span>
                                 
                                 <label for="duties">Job Duties:</label>
@@ -102,17 +101,17 @@
 
                                 <label for="ed-dates">Start Date of Education:</label>
                                 <!-- <input type="date" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY"> -->
-                                <input type="date" id="ed-dates" name="ed-dates" placeholder="MM/DD/YYY" required>
-                                <span class="error-message" id="start-date-error"></span>
+                                <input type="date" id="ed-dates" name="ed-dates" required>
+                                <span class="error-message" id="start-dt-error"></span>
 
                                 <label for="end-ed-dates">End Date of Education:</label>
                                 <!-- <input type="date" id="end-ed-dates" name="end-ed-dates" placeholder="MM/DD/YYY"> -->
-                                <input type="date" id="end-ed-dates" name="end-ed-dates" placeholder="MM/DD/YYY" required>
-                                <span class="error-message" id="end-date-error"></span>
+                                <input type="date" id="end-ed-dates" name="end-ed-dates" required>
+                                <span class="error-message" id="end-dt-error"></span>
                                 
                                 <label for="education">Degree or Certification:</label>
                                 <!-- <input type="text" id="education" name="education" placeholder="Degree or Certification"> -->
-                                <input type="text" id="education" name="education" placeholder="Degree or Certification"required>
+                                <input type="text" id="education" name="education" placeholder="Degree or Certification" required>
 
                                 <div class="bottom-buttons">
                                     <button type="button" class="add-entry" id="add-education">Add Education Experience</button>
@@ -264,7 +263,7 @@
                 aria-modal="true"
                 >
                 <section class="login-info-form">
-                    <span class="x-button" id="x-button" aria-label="Close login modal">&times;</span>
+                    <button class="x-button" id="x-button" aria-label="Close login modal">&times;</button>
                     <p>Don't have an account? Create one <a href="#" id="open-create-account">here</a>.</p>
                     <h2 id="login-title">Login</h2> <!-- This MUST be the same as the aria-labelledby!!! -->
                     <form id="login-form">
@@ -294,15 +293,15 @@
                     aria-modal="true"
                     >
                     <section class="registration-form">
-                        <span class="x-button" id="x-button" aria-label="Close register modal">&times;</span>
+                        <button class="x-button" id="rx-button" aria-label="Close register modal">&times;</button>
                         <h2 id="register-title">Create Your Account</h2>
                         <form>
                             <label for="reg-name">Name:</label>
-                            <input type="text" id="reg-name" name="reg-name" required/>
+                            <input type="text" id="reg-name" name="reg-name" required>
                             <span class="error-message" id="name-error"></span>
 
                             <label for="reg-email">Email:</label>
-                            <input type="email" id="reg-email" name="reg-email" required/>
+                            <input type="email" id="reg-email" name="reg-email" required>
                             <span class="error-message" id="email-error"></span>
 
                             <!-- div for password requirements -->
@@ -317,11 +316,11 @@
                                 </ul>
                             </div>
                             <label for="reg-password">Create Password:</label>
-                            <input type="password" id="reg-password" name="reg-password" required/>
+                            <input type="password" id="reg-password" name="reg-password" required>
                             <span class="error-message" id="password-error"></span>
 
                             <label for="re-ent-pwd">Re-Enter Password:</label>
-                            <input type="password" id="re-ent-pwd" name="re-ent-pwd" required/>
+                            <input type="password" id="re-ent-pwd" name="re-ent-pwd" required>
                             <span class="error-message" id="re-password-error"></span>
 
                             <button type="submit" id="create-account-button">Create Account</button>
@@ -331,9 +330,9 @@
                 </div>
             </div>
     </main>
+    <footer>
+        <p class="contact-me">&copy; Bryson Webb<br> Contact Email: <a href="mailto:web17029@byui.edu">bryson@email.com</a></p>
+        <p class="contact-me">Chelsea Saunders<br> Contact Email: <a href="mailto:sau24003@byui.edu">chelsea@email.com</a></p>
+    </footer>
 </body>
-<footer>
-    <p class="contact-me">&copy; Bryson Webb<br> Contact Email: <a href="mailto:web17029@byui.edu">bryson@email.com</a></p>
-    <p class="contact-me">Chelsea Saunders<br> Contact Email: <a href="mailto:sau24003@byui.edu">chelsea@email.com</a></p>
-</footer>
 </html>
