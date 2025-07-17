@@ -72,7 +72,7 @@
                                 <span class="error-message" id="start-date-error"></span>
 
                                 <label for="end-dates">End Date of Employment:</label>
-                                <input type="date" id="end-dates" name="dates" placeholder="MM/DD/YYY" required>
+                                <input type="date" id="end-dates" name="end-dates" placeholder="MM/DD/YYY" required>
                                 <span class="error-message" id="end-date-error"></span>
                                 
                                 <label for="duties">Job Duties:</label>
@@ -234,7 +234,8 @@
                             <div class="inside-form">
                                 <label for="profile" id="profile-p">Write a Paragraph About Yourself:</label>
                                 <!-- <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience."></textarea> -->
-                                <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience." required></textarea>
+                                <textarea id="profile" name="profile" placeholder="Type a little about your skills, interests, and experience."></textarea>
+                                <span id="profile-error" class="error-message"></span>
 
                                 <div class="submission-message hidden" id="submission-message"></div>
                                 <div class="bottom-buttons">

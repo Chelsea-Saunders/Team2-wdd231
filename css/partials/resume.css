@@ -1,14 +1,16 @@
 @import "./variables.css";
 
+
 .cont-info, .work-entry, .education, .languages, .references, .profile {
     display: grid;
     align-items: center;
     justify-items: center;
     padding: 0px;
 }
-
+.header {
+    margin-left: 10%;
+}
 .resume-header .header-row {
-    /* margin-left: 10%; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,6 +41,13 @@
     margin-bottom: 1px;
 }
 
+.work-entry li {
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+    margin: 4px 0;
+}
+
 .work-experience h2, .skills h2 {
     text-align: center;
     font-size: 1.5em;
@@ -59,15 +68,18 @@
     text-align: center;
 }
 
+/* body {
+    padding: 20px;
+} */
 .resume-body {
     background-color:  rgb(237, 246, 224);
     max-width: 800px;
     margin: 0 auto;
-    /* padding: 20px; */
     border: solid black;
 }
 
 .resume-footer {
+/* footer { */
     text-align: center;
     background-color: rgb(122, 123, 116);
     color: white;
@@ -82,12 +94,12 @@
 }
 
 .resume-main {
+/* main { */
     font-family: var(--body-font);
 }
 
 @media (min-width: 700px) {
     .resume-header .header-row {
-        /* margin-left: 10%; */
         display: flex;
         flex-direction: row;
         justify-content: space-between;

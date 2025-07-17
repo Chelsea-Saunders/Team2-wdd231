@@ -313,15 +313,44 @@ document.querySelector("#multiStepForm").addEventListener("submit", function(eve
             input.placeholder = `Enter a valid email address.`;
         }
     });
-    if (!allValid) {
-        const firstInvalid = document.querySelector("input.error-placeholder");
-        if (firstInvalid) {
-            firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
-            firstInvalid.focus();
+    const profileInput = document.querySelector("#profile");
+    if (!profileInput.value.trim()) {
+        const errorSpan = document.querySelector("#profile-error");
+        profileInput.classList.add("error-placeholder");
+        profileInput.value = ""; // clear input
+
+        // set placeholder in red
+        profileInput.placeholder = "REQUIRED: Type a brief profile about yourself.";
+
+        if (errorSpan) {
+            errorSpan.textContent = "";
         }
-        return; // stop submission if not valid
-        }
+
+        profileInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        profileInput.focus();
+        return; // stop submission if profile is empty
+    }
+    // if (!allValid) {
+    //     const firstInvalid = document.querySelector("input.error-placeholder");
+    //     if (firstInvalid) {
+    //         firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
+    //         firstInvalid.focus();
+    //     }
+    //     return; // stop submission if not valid
+    //     }
     
+    //     const profileInput = document.querySelector("#profile");
+    //     if (!profileInput.value.trim()) {
+    //         const errorSpan = document.querySelector("#profile-error");
+    //         if (errorSpan) {
+    //             errorSpan.textContent = "You must write something about yourself.";
+    //         }
+
+    //         profileInput.classList.add("error-placeholder");
+    //         profileInput.focus();
+    //         return; // stop submission if profile is empty
+    //     }
+
     // add to the "resumes" array
     let resumes = JSON.parse(localStorage.getItem("resumes"));
     if (!Array.isArray(resumes)) {
@@ -617,7 +646,8 @@ function loadFormData() {
 
 // CALL LOAD FORM DATA from local storage when page loads
 loadFormData(); // call this to reload input into form when page loads
-// this funtion will handle the back button
+
+// BACK BUTTON EVENT LISTENER
 backButton.forEach(btn => {
     btn.addEventListener("click", () => {
         saveFormData(); // save progress to local storage before going back
